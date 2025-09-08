@@ -1,16 +1,11 @@
 using UnityEngine;
 
+
 public class Math : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    //Draw in scene view
+    void OnDrawGizmos()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Gizmos.DrawSphere(transform.position, 5);
     }
 }
