@@ -9,10 +9,17 @@ public class Math : MonoBehaviour
     //Draw in scene view
     void OnDrawGizmos()
     {
-        Vector2 A = a.position;
-        Vector2 B = b.position;
+        Vector3 A = a.position;
+        Vector3 B = b.position;
 
-        Gizmos.color = Color.yellow;
-        //Gizmos.DrawSphere(transform.position, 1);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(Vector3.zero, A);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(Vector3.zero, B);
+        
+
+
+        // Gizmos.color = Color.yellow;
+        // Gizmos.DrawSphere(transform.position, 1);
     }
 }
