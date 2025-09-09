@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 
@@ -18,10 +19,20 @@ public class Math : MonoBehaviour
         Vector3 anorm = A / alen;
         Vector3 bnorm = B.normalized;
 
+
+        //draw line to objects
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(default, anorm);
+        Gizmos.DrawLine(default, A);
         Gizmos.color = Color.cyan;
         Gizmos.DrawLine(default, B);
+
+        //drawspehere
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(anorm, 0.1f);
+
+        //draw line for scaler projection dot product
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(B, anorm);
 
 
         
