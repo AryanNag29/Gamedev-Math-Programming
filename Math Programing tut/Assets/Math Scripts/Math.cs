@@ -32,9 +32,7 @@ public class Math : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(anorm, 0.1f);
 
-        //draw line for scaler projection dot product
-        //Gizmos.color = Color.blue;
-        //Gizmos.DrawLine(B, anorm);
+
 
 
         //scaler projection 
@@ -42,9 +40,13 @@ public class Math : MonoBehaviour
 
         //vector projection
         Vector3 vecProj = anorm * scalPro;
-
         Gizmos.color = Color.white;
         Gizmos.DrawSphere(vecProj, 0.05f);
+
+
+        //draw line for scaler projection dot product
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(B, vecProj);
 
         // Gizmos.color = Color.yellow;
         // Gizmos.DrawSphere(transform.position, 1);
