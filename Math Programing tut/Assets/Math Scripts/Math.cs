@@ -6,7 +6,9 @@ public class Math : MonoBehaviour
 {
     public Transform a;
     public Transform b;
+    
 
+    public float scalPro;
     //Draw in scene view
     void OnDrawGizmos()
     {
@@ -35,8 +37,14 @@ public class Math : MonoBehaviour
         //Gizmos.DrawLine(B, anorm);
 
 
-        
+        //scaler projection 
+        scalPro = Vector3.Dot(anorm, B);
 
+        //vector projection
+        Vector3 vecProj = anorm * scalPro;
+
+        Gizmos.color = Color.white;
+        Gizmos.DrawSphere(vecProj, 0.05f);
 
         // Gizmos.color = Color.yellow;
         // Gizmos.DrawSphere(transform.position, 1);
