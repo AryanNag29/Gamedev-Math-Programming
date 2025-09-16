@@ -31,8 +31,8 @@ public class Math : MonoBehaviour
         Gizmos.DrawSphere(anorm, 0.1f);
 
         //draw line for scaler projection dot product
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(B, anorm);
+        //Gizmos.color = Color.blue;
+        //Gizmos.DrawLine(B, anorm);
 
 
         
