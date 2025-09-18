@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Math : MonoBehaviour
 {
+    //reference to game object a and b
     public Transform a;
     public Transform b;
-    
+
 
     public float scalPro;
     //Draw in scene view
@@ -32,9 +33,6 @@ public class Math : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(anorm, 0.1f);
 
-
-
-
         //scaler projection 
         scalPro = Vector3.Dot(anorm, B);
 
@@ -48,7 +46,5 @@ public class Math : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(B, vecProj);
 
-        // Gizmos.color = Color.yellow;
-        // Gizmos.DrawSphere(transform.position, 1);
     }
 }
