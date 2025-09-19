@@ -7,8 +7,6 @@ public class Math : MonoBehaviour
     //reference to game object a and b
     public Transform a;
     public Transform b;
-
-
     public float scalPro;
     //Draw in scene view
     void OnDrawGizmos()
