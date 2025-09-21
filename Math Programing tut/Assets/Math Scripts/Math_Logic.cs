@@ -9,7 +9,8 @@ public class Math_Logic : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(default, radius);
+        Vector3 center = transform.position;
+        Gizmos.DrawWireSphere(center, radius);
         //Handles.DrawWireArc(); Handles has more functions then gizmos 
     }
 }
