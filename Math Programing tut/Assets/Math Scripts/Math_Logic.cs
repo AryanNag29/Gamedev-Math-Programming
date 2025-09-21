@@ -1,4 +1,5 @@
 using Unity.InferenceEngine;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 
@@ -26,6 +27,10 @@ public class Math_Logic : MonoBehaviour
 
         dist = Vector3.Distance(center, playerpos);
         Vector3 playerDist = P1.transform.position;
+        Vector3 delta = center - playerDist;
+        //long method to get distance of two vectors
+        float distlong = Mathf.Sqrt(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
+        
         Gizmos.DrawLine(center, playerDist);
         //istrigger Condition
         if (dist <= radius)
@@ -36,7 +41,7 @@ public class Math_Logic : MonoBehaviour
         {
             isTrigger = false;
         }
-        
+
         Gizmos.color = isTrigger ? Color.red : Color.white;
         Gizmos.DrawWireSphere(center, radius);
 
