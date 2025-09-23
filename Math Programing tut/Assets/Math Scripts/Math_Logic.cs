@@ -41,7 +41,6 @@ public class Math_Logic : MonoBehaviour
         {
             isTrigger = false;
         }
-
         Gizmos.color = isTrigger ? Color.red : Color.white;
         Gizmos.DrawWireSphere(center, radius);
 
