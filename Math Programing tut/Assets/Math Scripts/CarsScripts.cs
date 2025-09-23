@@ -29,13 +29,26 @@ public class CarsScripts : MonoBehaviour
         {
             isequal = true;
         }
-        else if (scalpro > 1)
+        else {
+            isequal = false;
+        }
+
+        if (scalpro > 0)
         {
             infront = true;
         }
-        else if (scalpro < 1)
+        else
+        {
+            infront = false;
+        }
+
+        if (scalpro < 0)
         {
             isbehind = true;
+        }
+        else
+        {
+            isbehind = false;
         }
 
         if (isequal)
