@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class Lazer : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnDrawGizmos()
     {
-        
-    }
+        Vector2 origin = transform.position;
+        Vector2 dir = transform.right;
+        Ray ray = new Ray(origin, dir);
 
-    // Update is called once per frame
-    void Update()
-    {
+        //draw line on x axis
+        Gizmos.DrawLine(origin, origin+dir);
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            Gizmos.DrawSphere(hit.point, 0.1f);
+        }
         
     }
 }
