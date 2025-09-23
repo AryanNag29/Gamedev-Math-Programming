@@ -20,7 +20,6 @@ public class Math : MonoBehaviour
         Vector3 anorm = A / alen;
         Vector3 bnorm = B.normalized;
 
-
         //draw line to objects
         Gizmos.color = Color.red;
         Gizmos.DrawLine(default, A);
@@ -38,7 +37,6 @@ public class Math : MonoBehaviour
         Vector3 vecProj = anorm * scalPro;
         Gizmos.color = Color.white;
         Gizmos.DrawSphere(vecProj, 0.05f);
-
 
         //draw line for scaler projection dot product
         Gizmos.color = Color.blue;

@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 9743922}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.08, y: 0, z: 0.96}
+  m_LocalPosition: {x: 1.96, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -159,6 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2066336857}
+  - component: {fileID: 2066336858}
   m_Layer: 0
   m_Name: PlayerCar
   m_TagString: Untagged
@@ -181,6 +182,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2066336858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066336856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1130803115902c24bbd07e5bf2c89e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarsScripts
+  enemy: {fileID: 9743923}
+  scalpro: NaN
+  vecpro: {x: NaN, y: NaN, z: NaN}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
