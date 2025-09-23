@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class Lazer : MonoBehaviour
@@ -10,6 +11,7 @@ public class Lazer : MonoBehaviour
 
         //draw line on x axis
         Gizmos.DrawLine(origin, origin+dir);
+
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
