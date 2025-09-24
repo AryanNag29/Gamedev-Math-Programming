@@ -1,4 +1,6 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using JetBrains.Annotations;
+using NUnit.Framework;
 using Unity.InferenceEngine;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -26,32 +28,10 @@ public class CarsScripts : MonoBehaviour
         Vector3 vecpro = pnrom * scalpro;
 
         //condition
-        if (scalpro == 0)
-        {
-            isequal = true;
-        }
-        else {
-            isequal = false;
-        }
-
-        if (scalpro > 0)
-        {
-            infront = true;
-        }
-        else
-        {
-            infront = false;
-        }
-
-        if (scalpro < 0)
-        {
-            isbehind = true;
-        }
-        else
-        {
-            isbehind = false;
-        }
-
+        isequal = scalpro == 0 ? true : false;
+        infront = scalpro > 0 ? true : false;
+        isbehind = scalpro < 0 ? true : false;
+        
 
         Gizmos.color = isequal? Color.blue : Color.white;
         Gizmos.color = infront? Color.red : Color.white;

@@ -12,11 +12,9 @@ public class Lazer : MonoBehaviour
         //draw line on x axis
         Gizmos.DrawLine(origin, origin+dir);
 
-
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             Gizmos.DrawSphere(hit.point, 0.1f);
         }
-        
     }
 }
