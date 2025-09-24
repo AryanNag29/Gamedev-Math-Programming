@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using Unity.InferenceEngine;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem.Processors;
@@ -19,7 +20,7 @@ public class CarsScripts : MonoBehaviour
 
         if (player == null) return;
 
-        float plen = playerVec.magnitude;
+        float plen = Mathf.Sqrt(playerVec.x*playerVec.x + playerVec.y*playerVec.y + playerVec.z* playerVec.z);
         Vector3 pnrom = playerVec / plen;
         scalpro = Vector3.Dot(pnrom, enemyVec);
         Vector3 vecpro = pnrom * scalpro;
@@ -51,39 +52,15 @@ public class CarsScripts : MonoBehaviour
             isbehind = false;
         }
 
-        if (isequal)
-        {
-            Gizmos.color = Color.blue;
-        }
-        else
-        {
-            Gizmos.color = Color.white;
-        }
 
-        if (infront)
-        {
-            Gizmos.color = Color.red;
-        }
-        else
-        {
-            Gizmos.color = Color.white;
-        }
-
-        if (isbehind)
-        {
-            Gizmos.color = Color.green;
-        }
-        else
-        {
-            Gizmos.color = Color.white;
-        }
+        Gizmos.color = isequal? Color.blue : Color.white;
+        Gizmos.color = infront? Color.red : Color.white;
+        Gizmos.color = isbehind ? Color.green : Color.white;
         
-
         //draw circle at scal pro
         Gizmos.DrawSphere(vecpro, 0.2f);
 
         //draw line from enemy car to vec pro
-        Gizmos.color = Color.blue;
         Gizmos.DrawLine(vecpro, enemyVec);
 
 
