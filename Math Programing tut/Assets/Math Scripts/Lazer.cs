@@ -1,5 +1,8 @@
 using System.Runtime.InteropServices;
+using UnityEditor.Analytics;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class Lazer : MonoBehaviour
 {
@@ -10,11 +13,22 @@ public class Lazer : MonoBehaviour
         Ray ray = new Ray(origin, dir);
 
         //draw line on x axis
-        Gizmos.DrawLine(origin, origin+dir);
+        Gizmos.DrawLine(origin, origin + dir);
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             Gizmos.DrawSphere(hit.point, 0.1f);
+
+            Vector2 Reflected = Reflect(ray.direction, hit.normal);
+            //draw line 
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(hit.point, (Vector2)hit.point + Reflected);
         }
+    }
+
+    Vector2 Reflect(Vector2 inDir, Vector2 normal)
+    {
+        float proj = Vector2.Dot(inDir, normal);
+        return inDir - 2 *proj* normal;
     }
 }
