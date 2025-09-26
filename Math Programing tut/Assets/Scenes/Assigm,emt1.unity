@@ -149,8 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Math_Logic
   P1: {fileID: 1572863942}
-  radius: 1
-  dist: 2.6943274
+  radius: 1.94
   isTrigger: 0
 --- !u!4 &192064998
 Transform:
@@ -161,7 +160,7 @@ Transform:
   m_GameObject: {fileID: 192064996}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11, y: 0, z: -0.12}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -192,7 +191,7 @@ Transform:
   m_GameObject: {fileID: 1572863941}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.44, y: 0, z: 0.75}
+  m_LocalPosition: {x: 0.009, y: 2.079, z: 0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

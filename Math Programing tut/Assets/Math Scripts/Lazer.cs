@@ -12,12 +12,13 @@ public class Lazer : MonoBehaviour
         Vector2 dir = transform.right;
         Ray ray = new Ray(origin, dir);
 
-        //draw line on x axis
-        Gizmos.DrawLine(origin, origin + dir);
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             Gizmos.DrawSphere(hit.point, 0.1f);
+            //draw line on x axis
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(origin, hit.point);
 
             Vector2 Reflected = Reflect(ray.direction, hit.normal);
             //draw line 

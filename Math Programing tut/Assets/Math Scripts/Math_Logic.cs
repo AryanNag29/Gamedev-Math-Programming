@@ -9,7 +9,7 @@ public class Math_Logic : MonoBehaviour
 
     public float radius = 1f;
 
-    public float dist;
+    private float dist;
 
     public bool isTrigger = false;
 
