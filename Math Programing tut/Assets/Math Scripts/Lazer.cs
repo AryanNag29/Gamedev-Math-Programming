@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class Lazer : MonoBehaviour
 {
 
-    #region gizmos
+    #region Gizmos
 
     void OnDrawGizmos()
     {

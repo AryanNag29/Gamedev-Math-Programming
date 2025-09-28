@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Math : MonoBehaviour
 {
-    #region gameobject reference
+    #region GameObject reference
 
     //reference to game object a and b
     public Transform a;
@@ -13,13 +13,13 @@ public class Math : MonoBehaviour
 
     #endregion
 
-    #region variables
+    #region Variables
 
     public float scalPro;
 
     #endregion
 
-    #region gizmos
+    #region Gizmos
 
     //Draw in scene view
     void OnDrawGizmos()
