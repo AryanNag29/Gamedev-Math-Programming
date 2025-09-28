@@ -5,10 +5,22 @@ using UnityEngine;
 
 public class Math : MonoBehaviour
 {
+    #region gameobject reference
+
     //reference to game object a and b
     public Transform a;
     public Transform b;
+
+    #endregion
+
+    #region variables
+
     public float scalPro;
+
+    #endregion
+
+    #region gizmos
+
     //Draw in scene view
     void OnDrawGizmos()
     {
@@ -44,6 +56,10 @@ public class Math : MonoBehaviour
         Gizmos.DrawLine(B, vecProj);
 
     }
+
+    #endregion
+
+    #region Enum state
     /* enum state machine logic
     public enum State
     {
@@ -69,4 +85,6 @@ public class Math : MonoBehaviour
                 break;
         }
     }*/
+
+    #endregion
 }

@@ -6,6 +6,9 @@ using UnityEngine.UIElements;
 
 public class Lazer : MonoBehaviour
 {
+
+    #region gizmos
+
     void OnDrawGizmos()
     {
         Vector2 origin = transform.position;
@@ -29,12 +32,17 @@ public class Lazer : MonoBehaviour
                 ray.origin = hit.point;
             }
             else break;
+        }
     }
-    }
+    #endregion
+
+    #region functions
 
     Vector2 Reflect(Vector2 inDir, Vector2 normal)
     {
         float proj = Vector2.Dot(inDir, normal);
-        return inDir - 2 *proj* normal;
+        return inDir - 2 * proj * normal;
     }
+    
+    #endregion
 }

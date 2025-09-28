@@ -5,13 +5,21 @@ using UnityEngine;
 
 public class Math_Logic : MonoBehaviour
 {
+    #region GameObject reference
+
     public Transform P1;
 
+    #endregion
+
+    #region Variables
+
     public float radius = 1f;
-
     private float dist;
-
     public bool isTrigger = false;
+
+    #endregion
+
+    #region Gizmos
 
     void OnDrawGizmos()
     {
@@ -30,7 +38,7 @@ public class Math_Logic : MonoBehaviour
         Vector3 delta = center - playerDist;
         //long method to get distance of two vectors
         float distlong = Mathf.Sqrt(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
-        
+
         Gizmos.DrawLine(center, playerDist);
         //istrigger Condition
         if (dist <= radius)
@@ -43,7 +51,6 @@ public class Math_Logic : MonoBehaviour
         }
         Gizmos.color = isTrigger ? Color.red : Color.white;
         Gizmos.DrawWireSphere(center, radius);
-
-
     }
+    #endregion
 }
