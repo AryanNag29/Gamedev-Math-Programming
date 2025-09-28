@@ -13,8 +13,8 @@ public class Lazer : MonoBehaviour
         Ray ray = new Ray(origin, dir);
         int maxBounces = 40;
 
-    for (int i = 0; i < maxBounces; i++)
-    {
+        for (int i = 0; i < maxBounces; i++)
+        {
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 Gizmos.DrawSphere(hit.point, 0.05f);
@@ -28,7 +28,7 @@ public class Lazer : MonoBehaviour
                 ray.direction = Reflected;
                 ray.origin = hit.point;
             }
-            else break;        
+            else break;
     }
     }
 
