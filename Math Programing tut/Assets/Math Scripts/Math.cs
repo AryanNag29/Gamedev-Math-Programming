@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -43,4 +44,29 @@ public class Math : MonoBehaviour
         Gizmos.DrawLine(B, vecProj);
 
     }
+    /* enum state machine logic
+    public enum State
+    {
+        Idle,
+        Walking,
+        Attacking
+    }
+
+    private State state;
+
+    public void Update()
+    {
+        switch (state)
+        {
+            case State.Idle:
+                //idle logic
+                break;
+            case State.Walking:
+                //walking logic
+                break;
+            case State.Attacking:
+                //attacking logic
+                break;
+        }
+    }*/
 }
