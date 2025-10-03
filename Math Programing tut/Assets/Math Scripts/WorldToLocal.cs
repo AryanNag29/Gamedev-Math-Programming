@@ -27,6 +27,7 @@ public class WorldToLocal : MonoBehaviour
     {
         //matrix transformation from local to world
         Matrix4x4 localtoworldmtx = transform.localToWorldMatrix;
+        //Transforming from one space to another(local , world)
         //transform.TransformPoint() // M*(v.x, v.y , v.z , 1); // local to world
         // transform.InverseTransformPoint(); // M^-1* (v.x , v.y , v.z ,1 ) // world to local 
         // transform.TransformVector(); //M*(v.x, v.y , v.z , 0) //it does not include position
@@ -34,7 +35,7 @@ public class WorldToLocal : MonoBehaviour
 
 
 
-        //world to local
+        //update in the inspector:
         localPos = worldtolocal(worldCoord);
         Gizmos.DrawSphere(worldCoord, 0.1f);
 
