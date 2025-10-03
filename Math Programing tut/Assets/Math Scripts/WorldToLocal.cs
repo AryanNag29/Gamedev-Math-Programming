@@ -25,6 +25,8 @@ public class WorldToLocal : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        //matrix transformation from local to world
+        Matrix4x4 localtoworldmtx = transform.localToWorldMatrix;
         localPos = worldtolocal(worldCoord);
         Gizmos.DrawSphere(worldCoord, 0.1f);
 
