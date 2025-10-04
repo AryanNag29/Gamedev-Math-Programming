@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TransformVectors : MonoBehaviour
+public class LocalToWorld : MonoBehaviour
 {
 
     #region Variables
