@@ -27,6 +27,7 @@ public class WorldToLocal : MonoBehaviour
     {
         //matrix transformation from local to world
         Matrix4x4 localtoworldmtx = transform.localToWorldMatrix;
+        localtoworldmtx.MultiplyPoint3x4(worldCoord); // ignore the last row of 4x4 matrix also faster
         //Transforming from one space to another(local , world)
         //transform.TransformPoint() // M*(v.x, v.y , v.z , 1); // local to world
         // transform.InverseTransformPoint(); // M^-1* (v.x , v.y , v.z ,1 ) // world to local 
