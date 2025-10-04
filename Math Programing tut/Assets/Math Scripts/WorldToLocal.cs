@@ -36,6 +36,7 @@ public class WorldToLocal : MonoBehaviour
 
 
         //update in the inspector:
+        Vector2 LocalPos = transform.InverseTransformPoint((Vector3)worldCoord); // M^-1 * (v.x,v.y,v.z,1)
         localPos = worldtolocal(worldCoord);
         Gizmos.DrawSphere(worldCoord, 0.1f);
 
