@@ -13,7 +13,8 @@ public class LocalToWorld : MonoBehaviour
 
     #region Functions
 
-    Vector2 LocalToWorld(Vector2 local) {
+    Vector2 LocaltoWorld(Vector2 local)
+    {
         //made the variable
         Vector2 position = transform.position;
         //store position + localcoord.x * transform.right
@@ -29,7 +30,9 @@ public class LocalToWorld : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        worldpos = LocalToWorld(localCoord);
+        //this is also a method to transform from local to world space
+        Vector2 WorldPos = transform.TransformPoint(localCoord); //M*(v.x,v.y,v.z,1)
+        worldpos = LocaltoWorld(localCoord);
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(worldpos, 0.1f);
         //local to world space line
