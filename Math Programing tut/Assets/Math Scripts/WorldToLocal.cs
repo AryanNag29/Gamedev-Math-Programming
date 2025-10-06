@@ -14,17 +14,17 @@ public class WorldToLocal : MonoBehaviour
     Vector3 worldtolocal(Vector3 world)
     {
         //shortcut
-        
+
         Matrix4x4 worldtolocalmtx = transform.worldToLocalMatrix;
-        return worldtolocalmtx.MultiplyPoint3x4(world);
+        worldtolocalmtx.MultiplyPoint3x4(world);
 
         //manual
 
-        // Vector3 rel = world - transform.position;
-        // float x = Vector3.Dot(rel, transform.right);
-        // float y = Vector3.Dot(rel, transform.up);
-        // float z = Vector3.Dot(rel, transform.forward);
-        // return new(x, y,z);
+        Vector3 rel = world - transform.position;
+        float x = Vector3.Dot(rel, transform.right);
+        float y = Vector3.Dot(rel, transform.up);
+        float z = Vector3.Dot(rel, transform.forward);
+        return new(x, y,z);
     }
 
     #endregion

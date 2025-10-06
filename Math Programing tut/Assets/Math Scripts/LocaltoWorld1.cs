@@ -19,16 +19,16 @@ public class LocalToWorld : MonoBehaviour
         //also a more complicated way using matrix trs(translation , rotation , scale)
         Matrix4x4 mtx = Matrix4x4.TRS(new Vector3(2, 5, 6), quaternion.identity, Vector3.one);
         //shoutcut
-        return transform.localToWorldMatrix.MultiplyPoint3x4(local);
+        transform.localToWorldMatrix.MultiplyPoint3x4(local);
 
         //manual way
-        // //made the variable
-        // Vector2 position = transform.position;
-        // //store position + localcoord.x * transform.right
-        // position += local.x * (Vector2)transform.right;
-        // //store position localcoord.y * transform.up
-        // position += local.x * (Vector2)transform.up;
-        // return position;
+        //made the variable
+        Vector2 position = transform.position;
+        //store position + localcoord.x * transform.right
+        position += local.x * (Vector2)transform.right;
+        //store position localcoord.y * transform.up
+        position += local.x * (Vector2)transform.up;
+        return position;
     }
 
     #endregion
