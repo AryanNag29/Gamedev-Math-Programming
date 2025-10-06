@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 public class LocalToWorld : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class LocalToWorld : MonoBehaviour
 
     Vector2 LocaltoWorld(Vector2 local)
     {
+        //also a more complicated way using matrix trs(translation , rotation , scale)
+        Matrix4x4 mtx = Matrix4x4.TRS(new Vector3(2, 5, 6), quaternion.identity, Vector3.one);
         //shoutcut
         return transform.localToWorldMatrix.MultiplyPoint3x4(local);
 
