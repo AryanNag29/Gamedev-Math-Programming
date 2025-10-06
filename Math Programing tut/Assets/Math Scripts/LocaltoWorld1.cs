@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-
 public class LocalToWorld : MonoBehaviour
 {
 
@@ -15,13 +15,17 @@ public class LocalToWorld : MonoBehaviour
 
     Vector2 LocaltoWorld(Vector2 local)
     {
-        //made the variable
-        Vector2 position = transform.position;
-        //store position + localcoord.x * transform.right
-        position += local.x * (Vector2)transform.right;
-        //store position localcoord.y * transform.up
-        position += local.x * (Vector2)transform.up;
-        return position;
+        //shoutcut
+        return transform.localToWorldMatrix.MultiplyPoint3x4(local);
+
+        //manual way
+        // //made the variable
+        // Vector2 position = transform.position;
+        // //store position + localcoord.x * transform.right
+        // position += local.x * (Vector2)transform.right;
+        // //store position localcoord.y * transform.up
+        // position += local.x * (Vector2)transform.up;
+        // return position;
     }
 
     #endregion
