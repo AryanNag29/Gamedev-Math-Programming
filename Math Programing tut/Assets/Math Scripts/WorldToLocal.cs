@@ -11,12 +11,20 @@ public class WorldToLocal : MonoBehaviour
 
     #region Function
 
-    Vector2 worldtolocal(Vector2 world)
+    Vector3 worldtolocal(Vector3 world)
     {
-        Vector2 rel = world - (Vector2)transform.position;
-        float x = Vector2.Dot(rel, transform.right);
-        float y = Vector2.Dot(rel, transform.up);
-        return new(x, y);
+        //shortcut
+        
+        Matrix4x4 worldtolocalmtx = transform.worldToLocalMatrix;
+        return worldtolocalmtx.MultiplyPoint3x4(world);
+
+        //manual
+
+        // Vector3 rel = world - transform.position;
+        // float x = Vector3.Dot(rel, transform.right);
+        // float y = Vector3.Dot(rel, transform.up);
+        // float z = Vector3.Dot(rel, transform.forward);
+        // return new(x, y,z);
     }
 
     #endregion
