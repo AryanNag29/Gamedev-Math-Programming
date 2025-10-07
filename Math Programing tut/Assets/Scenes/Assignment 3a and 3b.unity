@@ -159,7 +159,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1429111075}
-  - component: {fileID: 1429111074}
   - component: {fileID: 1429111076}
   m_Layer: 0
   m_Name: GameObject
@@ -168,20 +167,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1429111074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429111073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ee2bcb4bd9711c4998924ee669a64eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TransformVectors
-  localCoord: {x: 1, y: 1}
-  worldpos: {x: 3, y: 3}
 --- !u!4 &1429111075
 Transform:
   m_ObjectHideFlags: 0
