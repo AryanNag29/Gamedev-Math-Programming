@@ -176,7 +176,7 @@ Transform:
   m_GameObject: {fileID: 1429111073}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.995, y: 1.928, z: 0}
+  m_LocalPosition: {x: 2.13, y: 2.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocaltoWorld1
   localCoord: {x: 1, y: 1}
-  worldpos: {x: 2.995, y: 2.928}
+  worldpos: {x: 3.13, y: 3.06}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
