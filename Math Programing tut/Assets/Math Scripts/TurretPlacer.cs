@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class TurretPlacer : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnDrawGizmos()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Ray ray = new Ray(transform.position,transform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            
+        }
     }
 }
