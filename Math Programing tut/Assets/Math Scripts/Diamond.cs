@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Diamond : MonoBehaviour
 {
@@ -22,7 +20,7 @@ public class Diamond : MonoBehaviour
 
         Gizmos.DrawLine(A, B);
         Gizmos.DrawLine(B, C);
-        Gizmos.DrawLine(C, D);       
+        Gizmos.DrawLine(C, D);
         Gizmos.DrawLine(D, A);
     }
 }
