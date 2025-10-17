@@ -4,6 +4,7 @@ using UnityEngine;
 public class TurretPlacer : MonoBehaviour
 {
     public Transform turret;
+    public Transform turl;
     
     void OnDrawGizmos()
     {
