@@ -17,7 +17,7 @@ public class Diamond : MonoBehaviour
         Vector3 B = b.position;
         Vector3 C = c.position;
         Vector3 D = d.position;
-
+      
         Gizmos.DrawLine(A, B);
         Gizmos.DrawLine(B, C);
         Gizmos.DrawLine(C, D);
