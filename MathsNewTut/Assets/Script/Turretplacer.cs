@@ -13,10 +13,11 @@ public class Turretplacer : MonoBehaviour
         if(Physics.Raycast(ray,out RaycastHit hit))
         {
             turret.transform.position = hit.point;
-            
+
 
             Vector3 yAxis = hit.normal;
             //cross product for the turret
+            //Grahm-Schmidt orthonormalization
             Vector3 xAxis = Vector3.Cross(yAxis, ray.direction).normalized;
             Vector3 zAxis = Vector3.Cross(xAxis, yAxis);
             turret.rotation = Quaternion.LookRotation(xAxis,yAxis);
