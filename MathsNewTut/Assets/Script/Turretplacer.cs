@@ -14,6 +14,10 @@ public class Turretplacer : MonoBehaviour
         {
             turret.transform.position = hit.point;
             turret.rotation = Quaternion.LookRotation(ray.direction);
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawRay(hit.point, hit.normal);
+            Gizmos.DrawLine(ray.origin, hit.point);
         }
     }
 }
