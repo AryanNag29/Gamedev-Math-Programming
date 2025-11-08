@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
 
@@ -19,9 +20,28 @@ public class CheesyScript : MonoBehaviour
     {
         Vector3 origin = transform.position;
         Vector3 up = transform.up;
+        Vector3 right = transform.right;
+        Vector3 forward = transform.forward;
         Vector3 top = origin + up * height;
         Handles.DrawWireDisc(origin, up, radius);
         Handles.DrawWireDisc(top, up, radius);
+
+        //Drawing the angle
+        float p = angThresh;
+        float x = Mathf.Sqrt(1 - p * p);
+
+        Vector3 vLeft = forward * p + right * (-x);
+        Gizmos.DrawRay(origin, vLeft);
+        
+        Vector3 vRight = forward * p + right * x;
+        Gizmos.DrawRay(origin, vRight);
+
+        
+
     }
+    #endregion
+
+    #region Function
+
     #endregion
 }

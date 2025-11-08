@@ -406,13 +406,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594479870}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.059561502, y: 0.0030346601, z: 0.00018107117, w: 0.99822}
+  m_LocalRotation: {x: 0.19385703, y: 0.033842344, z: -0.002212136, w: 0.98044336}
   m_LocalPosition: {x: -0.437, y: 1.265, z: -4.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 6.829, y: 0.351, z: 0.042}
+  m_LocalEulerAnglesHint: {x: 22.351, y: 4.061, z: 0.544}
 --- !u!114 &594479874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,6 +470,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::newTurret
   Turret: {fileID: 1930190275}
+--- !u!1 &1076070330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1076070332}
+  - component: {fileID: 1076070331}
+  m_Layer: 0
+  m_Name: CheeseTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1076070331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076070330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5e9796dc95af9d4db4dafc93b4963ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheesyScript
+  target: {fileID: 1717583019}
+  radius: 1
+  height: 0.47
+  angThresh: 0.5
+--- !u!4 &1076070332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076070330}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1228421951
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,6 +734,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512208460}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1717583018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1717583019}
+  m_Layer: 0
+  m_Name: TAR
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1717583019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717583018}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.538, y: 0.438, z: 0.14125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1930190271
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,8 +847,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930190271}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.07522151, y: 0.98696417, z: -0.14126049, w: 0.017000882}
-  m_LocalPosition: {x: -0.41621116, y: 0.8584269, z: -0.81515217}
+  m_LocalRotation: {x: -0.05077978, y: 0.93721247, z: -0.34503484, w: 0.0022899737}
+  m_LocalPosition: {x: -0.2711498, y: 0.30215204, z: -1.8741672}
   m_LocalScale: {x: 0.7584, y: 0.7584, z: 0.7584}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -785,3 +864,5 @@ SceneRoots:
   - {fileID: 1228421953}
   - {fileID: 174406199}
   - {fileID: 1930190275}
+  - {fileID: 1076070332}
+  - {fileID: 1717583019}
