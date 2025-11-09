@@ -30,11 +30,17 @@ public class CheesyScript : MonoBehaviour
         float p = angThresh;
         float x = Mathf.Sqrt(1 - p * p);
 
-        Vector3 vLeft = forward * p + right * (-x);
+        Vector3 vLeft = (forward * p + right * (-x))*radius;
         Gizmos.DrawRay(origin, vLeft);
+        Gizmos.DrawRay(top, vLeft);
         
-        Vector3 vRight = forward * p + right * x;
+        Vector3 vRight = (forward * p + right * x)*radius;
         Gizmos.DrawRay(origin, vRight);
+        Gizmos.DrawRay(top, vRight);
+
+        Gizmos.DrawLine(origin, top);
+        Gizmos.DrawLine(origin + vLeft, top + vLeft);
+        Gizmos.DrawLine(origin + vRight , top + vRight);
 
         
 
