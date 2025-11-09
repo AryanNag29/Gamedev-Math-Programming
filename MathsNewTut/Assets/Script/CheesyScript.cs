@@ -18,6 +18,9 @@ public class CheesyScript : MonoBehaviour
     #region Gizmos
     void OnDrawGizmos()
     {
+        //making gizmos relative to localtoworld metrix
+        Gizmos.matrix = transform.localToWorldMatrix;
+
         Vector3 origin = transform.position;
         Vector3 up = transform.up;
         Vector3 right = transform.right;
