@@ -45,29 +45,36 @@ public class CheesyScript : MonoBehaviour
         Gizmos.DrawLine(origin, top);
         Gizmos.DrawLine(origin + vLeft, top + vLeft);
         Gizmos.DrawLine(origin + vRight, top + vRight);
+        Gizmos.DrawLine(origin, target.position);
     }
     #endregion
 
     #region Function
     public bool Contains(Vector3 position)
     {
+
         Vector3 dirToTargetWorld = (position - transform.position);
 
         //InverseTransformVector is  world to local
         Vector3 vecToTarget = transform.InverseTransformVector(dirToTargetWorld);
 
-        Vector3 dirToTarget = vecToTarget.normalized;
+        Vector3 flatDirToTarget = vecToTarget;
+        flatDirToTarget.y = 0;
+        Vector3 dirToTarget = flatDirToTarget.normalized;
 
 
 
         //cylindercal raidal check
-
+        
         //height check
         if (vecToTarget.y < 0 || vecToTarget.y > height) return false; //out of height range
 
+
         //angular checks
+        if (dirToTarget.z < angThresh) return false; //out of angular range
 
 
+        return true;
     }
     #endregion
     
