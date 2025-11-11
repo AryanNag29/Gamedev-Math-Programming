@@ -59,8 +59,9 @@ public class CheesyScript : MonoBehaviour
         Vector3 vecToTarget = transform.InverseTransformVector(dirToTargetWorld);
 
         Vector3 flatDirToTarget = vecToTarget;
+        float flatDirection = flatDirToTarget.magnitude;
         flatDirToTarget.y = 0;
-        Vector3 dirToTarget = flatDirToTarget.normalized;
+        flatDirToTarget /= flatDirection;
 
 
 
@@ -71,7 +72,7 @@ public class CheesyScript : MonoBehaviour
 
 
         //angular checks
-        if (dirToTarget.z < angThresh) return false; //out of angular range
+        if (flatDirToTarget.z < angThresh) return false; //out of angular range
 
 
         return true;
