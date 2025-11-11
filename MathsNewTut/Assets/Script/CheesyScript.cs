@@ -66,6 +66,8 @@ public class CheesyScript : MonoBehaviour
 
 
         //cylindercal raidal check
+
+        if (flatDirection > radius) return false; //out of radius range
         
         //height check
         if (vecToTarget.y < 0 || vecToTarget.y > height) return false; //out of height range
@@ -74,7 +76,7 @@ public class CheesyScript : MonoBehaviour
         //angular checks
         if (flatDirToTarget.z < angThresh) return false; //out of angular range
 
-
+        //if we pass all the test we are inside
         return true;
     }
     #endregion
