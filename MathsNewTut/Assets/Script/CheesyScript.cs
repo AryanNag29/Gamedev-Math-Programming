@@ -51,12 +51,19 @@ public class CheesyScript : MonoBehaviour
     #region Function
     public bool Contains(Vector3 position)
     {
-        //sphere
-        return Vector3.Distance(position, transform.position) < radius;
+        Vector3 dirToTargetWorld = (position - transform.position);
+
+        //InverseTransformVector is  world to local
+        Vector3 vecToTarget = transform.InverseTransformVector(dirToTargetWorld);
+
+        Vector3 dirToTarget = vecToTarget.normalized;
+
+
 
         //cylindercal raidal check
 
         //height check
+        if (vecToTarget.y < 0 || vecToTarget.y > height) return false; //out of height range
 
         //angular checks
 
