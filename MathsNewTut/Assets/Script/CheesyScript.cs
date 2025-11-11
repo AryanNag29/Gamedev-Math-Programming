@@ -20,6 +20,7 @@ public class CheesyScript : MonoBehaviour
     {
         //making gizmos relative to localtoworld metrix
         Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.color = Handles.color = Contains(target.position) ? Color.red : Color.white;
 
         Vector3 origin = transform.position;
         Vector3 up = transform.up;
@@ -48,12 +49,24 @@ public class CheesyScript : MonoBehaviour
     #endregion
 
     #region Function
+    public bool Contains(Vector3 position)
+    {
+        //sphere
+        return Vector3.Distance(position, transform.position) < radius;
 
+        //cylindercal raidal check
+
+        //height check
+
+        //angular checks
+
+
+    }
     #endregion
     
 
     //quick method to assign using localtoworld method
-    
+
     // void OnDrawGizmos()
     // {
     //     //making gizmos relative to localtoworld metrix
