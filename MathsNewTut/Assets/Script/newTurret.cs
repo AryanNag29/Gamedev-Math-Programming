@@ -21,7 +21,7 @@ public class newTurret : MonoBehaviour
             Vector3 xAxis = Vector3.Cross(yAxis, ray.direction).normalized;
             Vector3 zAxis = Vector3.Cross(yAxis, xAxis);
             Turret.rotation = quaternion.LookRotation(zAxis, yAxis);
-            Gizmos.color = Color.white;
+            Gizmos.color = new Color(1,1,1,0.4f); // the forth component for the new color is the opacity
             Gizmos.DrawLine(ray.origin, hit.point);
         }
     }
