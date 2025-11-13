@@ -21,6 +21,7 @@ public class CheesyScript : MonoBehaviour
     {
         //making gizmos relative to localtoworld metrix
         Gizmos.matrix = Handles.matrix = transform.localToWorldMatrix;
+        Gizmos.color = Handles.color = Contains(target.position) ? Color.red : Color.white;
 
         Vector3 top = new Vector3(0, height, 0);
         Handles.DrawWireDisc(default, Vector3.up, radius);
@@ -41,6 +42,7 @@ public class CheesyScript : MonoBehaviour
         Gizmos.DrawLine(default, top);
         Gizmos.DrawLine(vLeft, top + vLeft);
         Gizmos.DrawLine(vRight, top + vRight);
+
     }
     
     #endregion
