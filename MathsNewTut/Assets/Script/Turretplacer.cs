@@ -24,12 +24,6 @@ public class Turretplacer : MonoBehaviour
             Vector3 xAxis = Vector3.Cross(yAxis, ray.direction).normalized; //bitangent 
             Vector3 zAxis = Vector3.Cross(xAxis, yAxis); //tangents
             turret.rotation = Quaternion.LookRotation(zAxis, yAxis);
-            Gizmos.color = Color.green;
-            Gizmos.DrawRay(hit.point, yAxis);
-            Gizmos.color = Color.red;
-            Gizmos.DrawRay(hit.point, xAxis);
-            Gizmos.color = Color.blue;
-            Gizmos.DrawRay(hit.point, zAxis);
             Gizmos.color = Color.white;
             Gizmos.DrawLine(ray.origin, hit.point);
         }
