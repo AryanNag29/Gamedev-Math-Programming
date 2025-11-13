@@ -16,37 +16,33 @@ public class CheesyScript : MonoBehaviour
     #endregion
 
     #region Gizmos
+
     void OnDrawGizmos()
     {
         //making gizmos relative to localtoworld metrix
-        Gizmos.matrix = transform.localToWorldMatrix;
-        Gizmos.color = Handles.color = Contains(target.position) ? Color.red : Color.white;
+        Gizmos.matrix = Handles.matrix = transform.localToWorldMatrix;
 
-        Vector3 origin = transform.position;
-        Vector3 up = transform.up;
-        Vector3 right = transform.right;
-        Vector3 forward = transform.forward;
-        Vector3 top = origin + up * height;
-        Handles.DrawWireDisc(origin, up, radius);
-        Handles.DrawWireDisc(top, up, radius);
+        Vector3 top = new Vector3(0, height, 0);
+        Handles.DrawWireDisc(default, Vector3.up, radius);
+        Handles.DrawWireDisc(top, Vector3.up, radius);
 
         //Drawing the angle
         float p = angThresh;
         float x = Mathf.Sqrt(1 - p * p);
 
-        Vector3 vLeft = (forward * p + right * (-x)) * radius;
-        Gizmos.DrawRay(origin, vLeft);
+        Vector3 vLeft = new Vector3(-x, 0, p) * radius;
+        Gizmos.DrawRay(default, vLeft);
         Gizmos.DrawRay(top, vLeft);
 
-        Vector3 vRight = (forward * p + right * x) * radius;
-        Gizmos.DrawRay(origin, vRight);
+        Vector3 vRight = new Vector3(x, 0, p) * radius;
+        Gizmos.DrawRay(default, vRight);
         Gizmos.DrawRay(top, vRight);
 
-        Gizmos.DrawLine(origin, top);
-        Gizmos.DrawLine(origin + vLeft, top + vLeft);
-        Gizmos.DrawLine(origin + vRight, top + vRight);
-        Gizmos.DrawLine(origin, target.position);
+        Gizmos.DrawLine(default, top);
+        Gizmos.DrawLine(vLeft, top + vLeft);
+        Gizmos.DrawLine(vRight, top + vRight);
     }
+    
     #endregion
 
     #region Function
@@ -80,33 +76,40 @@ public class CheesyScript : MonoBehaviour
         return true;
     }
     #endregion
-    
 
-    //quick method to assign using localtoworld method
 
-    // void OnDrawGizmos()
+    //long method to assign using localtoworld method
+
+
+        // void OnDrawGizmos()
     // {
     //     //making gizmos relative to localtoworld metrix
     //     Gizmos.matrix = transform.localToWorldMatrix;
+    //     Gizmos.color = Handles.color = Contains(target.position) ? Color.red : Color.white;
 
-    //     Vector3 top = new Vector3(0,height,0);
-    //     Handles.DrawWireDisc(default, Vector3.up, radius);
-    //     Handles.DrawWireDisc(top, Vector3.up, radius);
+    //     Vector3 origin = transform.position;
+    //     Vector3 up = transform.up;
+    //     Vector3 right = transform.right;
+    //     Vector3 forward = transform.forward;
+    //     Vector3 top = origin + up * height;
+    //     Handles.DrawWireDisc(origin, up, radius);
+    //     Handles.DrawWireDisc(top, up, radius);
 
     //     //Drawing the angle
     //     float p = angThresh;
     //     float x = Mathf.Sqrt(1 - p * p);
 
-    //     Vector3 vLeft = new Vector3(-x, 0, p) * radius;
-    //     Gizmos.DrawRay(default, vLeft);
+    //     Vector3 vLeft = (forward * p + right * (-x)) * radius;
+    //     Gizmos.DrawRay(origin, vLeft);
     //     Gizmos.DrawRay(top, vLeft);
 
-    //     Vector3 vRight = new Vector3(x, 0, p) * radius;
-    //     Gizmos.DrawRay(default, vRight);
+    //     Vector3 vRight = (forward * p + right * x) * radius;
+    //     Gizmos.DrawRay(origin, vRight);
     //     Gizmos.DrawRay(top, vRight);
 
-    //     Gizmos.DrawLine(default, top);
-    //     Gizmos.DrawLine(vLeft, top + vLeft);
-    //     Gizmos.DrawLine(vRight , top + vRight);
+    //     Gizmos.DrawLine(origin, top);
+    //     Gizmos.DrawLine(origin + vLeft, top + vLeft);
+    //     Gizmos.DrawLine(origin + vRight, top + vRight);
+    //     Gizmos.DrawLine(origin, target.position);
     // }
 }
