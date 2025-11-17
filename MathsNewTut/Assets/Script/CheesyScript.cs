@@ -21,13 +21,14 @@ public class CheesyScript : MonoBehaviour
     {
         //making gizmos relative to localtoworld metrix
         Gizmos.matrix = Handles.matrix = transform.localToWorldMatrix;
+        //Condition for the trigger
         Gizmos.color = Handles.color = Contains(target.position) ? Color.red : Color.white;
 
         Vector3 top = new Vector3(0, height, 0);
         Handles.DrawWireDisc(default, Vector3.up, radius);
         Handles.DrawWireDisc(top, Vector3.up, radius);
 
-        //Drawing the angle
+        //Drawing the angle(pythagoras theorem)
         float p = angThresh;
         float x = Mathf.Sqrt(1 - p * p);
 
