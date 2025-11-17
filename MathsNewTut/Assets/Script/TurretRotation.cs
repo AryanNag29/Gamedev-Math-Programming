@@ -9,7 +9,7 @@ public class TurretRotation : MonoBehaviour
     public CheesyScript trigger;
     public Transform gunTf;
     public float smoothingFector = 1f;
-    Quaternion TargetRotation
+    Quaternion TargetRotation;
     #endregion
 
     #region Variables
