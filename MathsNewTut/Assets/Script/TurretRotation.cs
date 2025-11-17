@@ -9,6 +9,7 @@ public class TurretRotation : MonoBehaviour
     public CheesyScript trigger;
     public Transform gunTf;
     public float smoothingFector = 1f;
+    Quaternion TargetRotation
     #endregion
 
     #region Variables
@@ -26,9 +27,10 @@ public class TurretRotation : MonoBehaviour
         {
             //note: worldspace rotation
             Vector3 vecToTargetgun = target.position - gunTf.position;
-            Quaternion TargetRotation = Quaternion.LookRotation(vecToTargetgun, transform.up); 
+            TargetRotation = Quaternion.LookRotation(vecToTargetgun, transform.up); 
+        }     
+            //smoothing rotation towards target using slerp  
             gunTf.rotation = Quaternion.Slerp(gunTf.rotation, TargetRotation,smoothingFector*Time.deltaTime);
-        }       
     }
     #endregion
 
