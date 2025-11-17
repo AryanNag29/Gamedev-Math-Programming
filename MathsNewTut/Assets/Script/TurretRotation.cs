@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,6 +8,7 @@ public class TurretRotation : MonoBehaviour
     public Transform target;
     public CheesyScript trigger;
     public Transform gunTf;
+    public float smoothingVector;
     #endregion
 
     #region Variables
@@ -18,17 +20,15 @@ public class TurretRotation : MonoBehaviour
     #endregion
 
     #region Gizmos
-    void OnDrawGizmos()
+    void Update()
     {
         if (trigger.Contains(target.position))
         {
             //note: worldspace rotation
-            
             Vector3 vecToTargetgun = target.position - gunTf.position;
-            gunTf.rotation = Quaternion.LookRotation(vecToTargetgun, transform.up);
-
-        }
-       
+            Quaternion TargetRotation = Quaternion.LookRotation(vecToTargetgun, transform.up); 
+            gunTf.rotation = Quaternion.Slerp(gunTf.rotation, TargetRotation,0.5f);
+        }       
     }
     #endregion
 
