@@ -23,6 +23,8 @@ public class TurretRotation : MonoBehaviour
     #region Update
     void Update()
     {
+        float angleDeg = 45f;
+        float angleRad = angleDeg * Mathf.Deg2Rad;
         if (trigger.Contains(target.position))
         {
             //note: worldspace rotation
