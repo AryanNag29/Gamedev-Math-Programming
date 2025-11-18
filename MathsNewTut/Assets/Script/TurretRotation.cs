@@ -8,7 +8,7 @@ public class TurretRotation : MonoBehaviour
     public Transform target;
     public CheesyScript trigger;
     public Transform gunTf;
-    public float smoothingFector = 1f;
+    public float smoothingFector = 1f; //t
     Quaternion TargetRotation;
     #endregion
 
