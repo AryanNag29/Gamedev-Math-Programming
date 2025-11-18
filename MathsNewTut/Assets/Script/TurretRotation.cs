@@ -24,7 +24,8 @@ public class TurretRotation : MonoBehaviour
     void Update()
     {
         float angleDeg = 45f;
-        float angleRad = angleDeg * Mathf.Deg2Rad;
+        float angleRad = angleDeg * Mathf.Deg2Rad; // 360/6.28
+        float againangDeg = angleRad * Mathf.Rad2Deg; //6.28/360
         if (trigger.Contains(target.position))
         {
             //note: worldspace rotation
