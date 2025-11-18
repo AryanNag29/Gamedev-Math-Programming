@@ -20,7 +20,7 @@ public class TurretRotation : MonoBehaviour
 
     #endregion
 
-    #region Gizmos
+    #region Update
     void Update()
     {
         if (trigger.Contains(target.position))
