@@ -11,7 +11,7 @@ public class Trigo : MonoBehaviour
     #endregion
 
     #region function
-    static Vector2 AngToDis(float angRad) => new (Mathf.Cos(angRad),Mathf.Sin(angRad));
+    static Vector2 AngToDis(float angRad) => new Vector2(Mathf.Cos(angRad),Mathf.Sin(angRad));
     #endregion
 
     #region Gizmos
