@@ -7,7 +7,7 @@ public class Trigo : MonoBehaviour
 {
     #region Variables
     [Range(0,360)]
-    public float angDeg = 0f;
+    [SerializeField]private float angDeg = 0f;
     #endregion
 
     #region function
@@ -17,9 +17,9 @@ public class Trigo : MonoBehaviour
     #region Gizmos
     void OnDrawGizmos()
     {
-        Handles.DrawWireDisc(Vector3.zero,Vector3.forward,1);
+        Handles.DrawWireDisc(Vector3.zero,Vector3.forward,1f);
         float angRad = angDeg * Mathf.Deg2Rad;
-        //float angTurns = (float)EditorApplication.timeSinceStartup;
+        //float angTurns = (float)EditorApplication.timeSinceStartup; //this function use to run the time of edior without using update function make sure to tick the always refresh in the editor
         Vector2 v = AngToDis(angRad);
         Gizmos.DrawRay(default,v);
     }
