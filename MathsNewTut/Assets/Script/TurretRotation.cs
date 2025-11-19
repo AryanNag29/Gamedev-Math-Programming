@@ -32,7 +32,7 @@ public class TurretRotation : MonoBehaviour
             Vector3 vecToTargetgun = target.position - gunTf.position;
             TargetRotation = Quaternion.LookRotation(vecToTargetgun, transform.up); 
         }     
-            //smoothing rotation towards target using slerp  
+            //smoothing rotation towards target using slerp  (make this outsize of condition)
             gunTf.rotation = Quaternion.Slerp(gunTf.rotation, TargetRotation,smoothingFector*Time.deltaTime);
     }
     #endregion
