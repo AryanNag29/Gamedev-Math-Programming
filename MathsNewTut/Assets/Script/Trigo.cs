@@ -19,7 +19,9 @@ public class Trigo : MonoBehaviour
     {
         Handles.DrawWireDisc(Vector3.zero,Vector3.forward,1);
         float angRad = angDeg * Mathf.Deg2Rad;
-        Gizmos.DrawRay(default,AngToDis(angRad));
+        float angTurns = (float)EditorApplication.timeSinceStartup;
+        Vector2 v = AngToDis(angTurns * Mathf.PI *2);
+        Gizmos.DrawRay(default,v);
     }
     #endregion
 }
