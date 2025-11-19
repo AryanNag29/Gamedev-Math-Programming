@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -23,6 +24,15 @@ public class TurretRotation : MonoBehaviour
     #region Update
     void Update()
     {
+        //snell's law using unity plane type
+        Plane plane = new Plane(Vector3.up , Vector3.zero);
+        Ray ray = default; 
+        if(plane.Raycast(ray , out float dist))
+        {
+            Vector3 lightIntersection = ray.GetPoint(dist);
+        }
+
+
         float angleDeg = 45f;
         float angleRad = angleDeg * Mathf.Deg2Rad; // 360/6.28
         float againangDeg = angleRad * Mathf.Rad2Deg; //6.28/360
