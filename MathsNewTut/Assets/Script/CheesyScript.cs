@@ -15,6 +15,11 @@ public class CheesyScript : MonoBehaviour
     public float fovDeg = 45f; //an actual angle
     #endregion
 
+    #region Properties
+    
+    float angleThresh => Mathf.Cos(fovDeg*Mathf.Deg2Rad/2);
+    #endregion
+
     #region Gizmos
 
     void OnDrawGizmos()
@@ -79,7 +84,6 @@ public class CheesyScript : MonoBehaviour
         return true;
     }
 
-    float angleThresh => Mathf.Cos(fovDeg*Mathf.Deg2Rad/2);
     #endregion
 
 
