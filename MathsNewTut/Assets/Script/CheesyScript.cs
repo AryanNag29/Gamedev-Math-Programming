@@ -11,8 +11,8 @@ public class CheesyScript : MonoBehaviour
     #region Variables 
     public float radius = 1;
     public float height = 1;
-    [Range(0, 1)] //quite usefull for the range base slider
-    public float angThresh = 0.5f; //not an actual
+    [Range(0, 180)] //quite usefull for the range base slider
+    public float angDeg = 45f; //not an actual
     #endregion
 
     #region Gizmos
