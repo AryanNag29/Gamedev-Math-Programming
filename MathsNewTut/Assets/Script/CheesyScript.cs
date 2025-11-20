@@ -12,7 +12,7 @@ public class CheesyScript : MonoBehaviour
     public float radius = 1;
     public float height = 1;
     [Range(0, 180)] //quite usefull for the range base slider
-    public float angDeg = 45f; //not an actual
+    public float fovDeg = 45f; //an actual angle
     #endregion
 
     #region Gizmos
@@ -29,7 +29,7 @@ public class CheesyScript : MonoBehaviour
         Handles.DrawWireDisc(top, Vector3.up, radius);
 
         //Drawing the angle(pythagoras theorem)
-        float p = angThresh;
+        float p = angleThresh;
         float x = Mathf.Sqrt(1 - p * p);
 
         Vector3 vLeft = new Vector3(-x, 0, p) * radius;
@@ -73,11 +73,13 @@ public class CheesyScript : MonoBehaviour
 
 
         //angular checks
-        if (flatDirToTarget.z < angThresh) return false; //out of angular range
+        if (flatDirToTarget.z < angleThresh) return false; //out of angular range
 
         //if we pass all the test we are inside
         return true;
     }
+
+    float angleThresh => Mathf.Cos(fovDeg*Mathf.Deg2Rad/2);
     #endregion
 
 
