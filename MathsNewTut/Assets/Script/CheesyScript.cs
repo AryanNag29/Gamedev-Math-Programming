@@ -1,3 +1,4 @@
+using System;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
@@ -16,8 +17,9 @@ public class CheesyScript : MonoBehaviour
     #endregion
 
     #region Properties
-    
-    float angleThresh => Mathf.Cos(fovDeg*Mathf.Deg2Rad/2);
+    float fovRed=>fovDeg*Mathf.Deg2Rad;
+    float angleThresh => Mathf.Cos(fovRed/2);
+
     #endregion
 
     #region Gizmos
@@ -28,20 +30,27 @@ public class CheesyScript : MonoBehaviour
         Gizmos.matrix = Handles.matrix = transform.localToWorldMatrix;
         //Condition for the trigger
         Gizmos.color = Handles.color = Contains(target.position) ? Color.red : Color.white;
-
-        Vector3 top = new Vector3(0, height, 0);
-        Handles.DrawWireDisc(default, Vector3.up, radius);
-        Handles.DrawWireDisc(top, Vector3.up, radius);
-
+        
         //Drawing the angle(pythagoras theorem)
         float p = angleThresh;
         float x = Mathf.Sqrt(1 - p * p);
-
+        
         Vector3 vLeft = new Vector3(-x, 0, p) * radius;
+        Vector3 vRight = new Vector3(x, 0, p) * radius;
+
+        Vector3 top = new Vector3(0, height, 0);
+        Handles.DrawWireArc(default,Vector3.up,vLeft,fovDeg,radius);
+        Handles.DrawWireArc(top,Vector3.up,vLeft,fovDeg,radius);
+        // Handles.DrawWireDisc(default, Vector3.up, radius);
+        // Handles.DrawWireDisc(top, Vector3.up, radius);
+
+        
+
+        ;
         Gizmos.DrawRay(default, vLeft);
         Gizmos.DrawRay(top, vLeft);
 
-        Vector3 vRight = new Vector3(x, 0, p) * radius;
+        
         Gizmos.DrawRay(default, vRight);
         Gizmos.DrawRay(top, vRight);
 
