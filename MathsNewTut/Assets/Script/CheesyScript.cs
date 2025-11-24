@@ -1,5 +1,6 @@
 using System;
 using JetBrains.Annotations;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 
@@ -37,6 +38,8 @@ public class CheesyScript : MonoBehaviour
         
         Vector3 vLeft = new Vector3(-x, 0, p) * radius;
         Vector3 vRight = new Vector3(x, 0, p) * radius;
+
+        Quaternion up90 = Quaternion.AngleAxis(90,Vector3.up);
 
         Vector3 top = new Vector3(0, height, 0);
         Handles.DrawWireArc(default,Vector3.up,vLeft,fovDeg,radius);
