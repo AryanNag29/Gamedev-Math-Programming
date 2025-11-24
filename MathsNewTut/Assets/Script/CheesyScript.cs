@@ -46,6 +46,9 @@ public class CheesyScript : MonoBehaviour
         //transform.eulerAngles
         Quaternion VecA = Quaternion.Euler(30,45,90);
         Quaternion VecB = Quaternion.AngleAxis(60,Vector3.up);
+        Quaternion rotCombination = VecA * VecB; //combined rotation
+        Quaternion.Slerp(VecA,VecB,5f);
+        Quaternion rotInverse = Quaternion.Inverse(rotCombination);
 
         Vector3 top = new Vector3(0, height, 0);
         Handles.DrawWireArc(default,Vector3.up,vLeft,fovDeg,radius);
