@@ -1,6 +1,7 @@
 using System;
 using JetBrains.Annotations;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -41,6 +42,8 @@ public class CheesyScript : MonoBehaviour
 
         //this is basically mean this 1y = 90degree
         Quaternion up90 = Quaternion.AngleAxis(90,Vector3.up);
+        //euler angles 
+        //transform.eulerAngles
 
         Vector3 top = new Vector3(0, height, 0);
         Handles.DrawWireArc(default,Vector3.up,vLeft,fovDeg,radius);
