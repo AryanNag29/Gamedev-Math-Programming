@@ -44,6 +44,8 @@ public class CheesyScript : MonoBehaviour
         Quaternion up90 = Quaternion.AngleAxis(90,Vector3.up);
         //euler angles 
         //transform.eulerAngles
+        Quaternion VecA = Quaternion.Euler(30,45,90);
+        Quaternion VecB = Quaternion.AngleAxis(60,Vector3.up);
 
         Vector3 top = new Vector3(0, height, 0);
         Handles.DrawWireArc(default,Vector3.up,vLeft,fovDeg,radius);
