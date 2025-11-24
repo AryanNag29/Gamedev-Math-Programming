@@ -39,6 +39,7 @@ public class CheesyScript : MonoBehaviour
         Vector3 vLeft = new Vector3(-x, 0, p) * radius;
         Vector3 vRight = new Vector3(x, 0, p) * radius;
 
+        //this is basically mean this 1y = 90degree
         Quaternion up90 = Quaternion.AngleAxis(90,Vector3.up);
 
         Vector3 top = new Vector3(0, height, 0);
