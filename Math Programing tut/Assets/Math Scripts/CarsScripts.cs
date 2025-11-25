@@ -31,6 +31,7 @@ public class CarsScripts : MonoBehaviour
     {
         Vector3 enemyVec = enemy.position;
         Vector3 playerVec = player.position;
+        
 
         if (player == null) return;
 
