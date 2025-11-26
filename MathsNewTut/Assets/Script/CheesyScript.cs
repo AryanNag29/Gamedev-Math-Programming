@@ -49,9 +49,13 @@ public class CheesyScript : MonoBehaviour
         //Drawing the angle(pythagoras theorem)
         float p = angleThresh;
         float x = Mathf.Sqrt(1 - p * p);
-        
-        Vector3 vLeft = new Vector3(-x, 0, p) * outterRadius;
-        Vector3 vRight = new Vector3(x, 0, p) * outterRadius;
+
+        Vector3 vLefDir = new Vector3(-x, 0, p);
+        Vector3 vRightDir = new Vector3(x, 0, p);
+        Vector3 vLeftOutter = vLefDir * outterRadius;
+        Vector3 vRightOutter = vRightDir * outterRadius;
+        Vector3 vLeftInner = vLefDir * innerRadius;
+        Vector3 vRightInner = vRightDir * innerRadius;
 
         //this is basically mean this 1y = 90degree
         Quaternion up90 = Quaternion.AngleAxis(90,Vector3.up);
@@ -62,29 +66,29 @@ public class CheesyScript : MonoBehaviour
         Quaternion rotCombination = VecA * VecB; //combined rotation
         Quaternion.Slerp(VecA,VecB,5f);
         Quaternion rotInverse = Quaternion.Inverse(rotCombination);
-        Vector3 rotateVec = rotInverse*vLeft;
+        Vector3 rotateVec = rotInverse*vLeftOutter;
 
         Vector3 top = new Vector3(0, height, 0);
-        Handles.DrawWireArc(default,Vector3.up,vLeft,fovDeg,outterRadius-innerRadius);
-        Handles.DrawWireArc(top,Vector3.up,vLeft,fovDeg,outterRadius-innerRadius);
-        Handles.DrawWireArc(default,Vector3.up,vLeft,fovDeg,outterRadius);
-        Handles.DrawWireArc(top,Vector3.up,vLeft,fovDeg,outterRadius);
+        Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,outterRadius-innerRadius);
+        Handles.DrawWireArc(top,Vector3.up,vLeftOutter,fovDeg,outterRadius-innerRadius);
+        Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,outterRadius);
+        Handles.DrawWireArc(top,Vector3.up,vLeftOutter,fovDeg,outterRadius);
         // Handles.DrawWireDisc(default, Vector3.up, outterRadius);
         // Handles.DrawWireDisc(top, Vector3.up, outterRadius);
 
         
 
         ;
-        Gizmos.DrawRay(default, vLeft);
-        Gizmos.DrawRay(top, vLeft);
+        Gizmos.DrawRay(default, vLeftOutter);
+        Gizmos.DrawRay(top, vLeftOutter);
 
         
-        Gizmos.DrawRay(default, vRight);
-        Gizmos.DrawRay(top, vRight);
+        Gizmos.DrawRay(default, vRightOutter);
+        Gizmos.DrawRay(top, vRightOutter);
 
         Gizmos.DrawLine(default, top);
-        Gizmos.DrawLine(vLeft, top + vLeft);
-        Gizmos.DrawLine(vRight, top + vRight);
+        Gizmos.DrawLine(vLeftOutter, top + vLeftOutter);
+        Gizmos.DrawLine(vRightOutter, top + vRightOutter);
 
     }
     
@@ -145,17 +149,17 @@ public class CheesyScript : MonoBehaviour
     //     float p = angThresh;
     //     float x = Mathf.Sqrt(1 - p * p);
 
-    //     Vector3 vLeft = (forward * p + right * (-x)) * outterRadius;
-    //     Gizmos.DrawRay(origin, vLeft);
-    //     Gizmos.DrawRay(top, vLeft);
+    //     Vector3 vLeftOutter = (forward * p + right * (-x)) * outterRadius;
+    //     Gizmos.DrawRay(origin, vLeftOutter);
+    //     Gizmos.DrawRay(top, vLeftOutter);
 
-    //     Vector3 vRight = (forward * p + right * x) * outterRadius;
-    //     Gizmos.DrawRay(origin, vRight);
-    //     Gizmos.DrawRay(top, vRight);
+    //     Vector3 vRightOutter = (forward * p + right * x) * outterRadius;
+    //     Gizmos.DrawRay(origin, vRightOutter);
+    //     Gizmos.DrawRay(top, vRightOutter);
 
     //     Gizmos.DrawLine(origin, top);
-    //     Gizmos.DrawLine(origin + vLeft, top + vLeft);
-    //     Gizmos.DrawLine(origin + vRight, top + vRight);
+    //     Gizmos.DrawLine(origin + vLeftOutter, top + vLeftOutter);
+    //     Gizmos.DrawLine(origin + vRightOutterOutter, top + vRightOutterOutter);
     //     Gizmos.DrawLine(origin, target.position);
     // }
 }
