@@ -16,6 +16,7 @@ public class CheesyScript : MonoBehaviour
     #region Variables 
     [FormerlySerializedAs("radius")] //unity will remember the variable as it formal name even you changed the name
     public float outterRadius = 1;
+    public float innerRadius = 0.2f;
     public float height = 1;
     [Range(0, 180)] //quite usefull for the range base slider
     public float fovDeg = 45f; //an actual angle
@@ -49,8 +50,8 @@ public class CheesyScript : MonoBehaviour
         float p = angleThresh;
         float x = Mathf.Sqrt(1 - p * p);
         
-        Vector3 vLeft = new Vector3(-x, 0, p) * radius;
-        Vector3 vRight = new Vector3(x, 0, p) * radius;
+        Vector3 vLeft = new Vector3(-x, 0, p) * outterRadius;
+        Vector3 vRight = new Vector3(x, 0, p) * outterRadius;
 
         //this is basically mean this 1y = 90degree
         Quaternion up90 = Quaternion.AngleAxis(90,Vector3.up);
@@ -64,10 +65,10 @@ public class CheesyScript : MonoBehaviour
         Vector3 rotateVec = rotInverse*vLeft;
 
         Vector3 top = new Vector3(0, height, 0);
-        Handles.DrawWireArc(default,Vector3.up,vLeft,fovDeg,radius);
-        Handles.DrawWireArc(top,Vector3.up,vLeft,fovDeg,radius);
-        // Handles.DrawWireDisc(default, Vector3.up, radius);
-        // Handles.DrawWireDisc(top, Vector3.up, radius);
+        Handles.DrawWireArc(default,Vector3.up,vLeft,fovDeg,outterRadius);
+        Handles.DrawWireArc(top,Vector3.up,vLeft,fovDeg,outterRadius);
+        // Handles.DrawWireDisc(default, Vector3.up, outterRadius);
+        // Handles.DrawWireDisc(top, Vector3.up, outterRadius);
 
         
 
@@ -105,7 +106,7 @@ public class CheesyScript : MonoBehaviour
 
         //cylindercal raidal check
 
-        if (flatDirection > radius) return false; //out of radius range
+        if (flatDirection > outterRadius) return false; //out of outterRadius range
         
         //height check
         if (vecToTarget.y < 0 || vecToTarget.y > height) return false; //out of height range
@@ -135,18 +136,18 @@ public class CheesyScript : MonoBehaviour
     //     Vector3 right = transform.right;
     //     Vector3 forward = transform.forward;
     //     Vector3 top = origin + up * height;
-    //     Handles.DrawWireDisc(origin, up, radius);
-    //     Handles.DrawWireDisc(top, up, radius);
+    //     Handles.DrawWireDisc(origin, up, outterRadius);
+    //     Handles.DrawWireDisc(top, up, outterRadius);
 
     //     //Drawing the angle
     //     float p = angThresh;
     //     float x = Mathf.Sqrt(1 - p * p);
 
-    //     Vector3 vLeft = (forward * p + right * (-x)) * radius;
+    //     Vector3 vLeft = (forward * p + right * (-x)) * outterRadius;
     //     Gizmos.DrawRay(origin, vLeft);
     //     Gizmos.DrawRay(top, vLeft);
 
-    //     Vector3 vRight = (forward * p + right * x) * radius;
+    //     Vector3 vRight = (forward * p + right * x) * outterRadius;
     //     Gizmos.DrawRay(origin, vRight);
     //     Gizmos.DrawRay(top, vRight);
 
