@@ -65,6 +65,8 @@ public class CheesyScript : MonoBehaviour
         Vector3 rotateVec = rotInverse*vLeft;
 
         Vector3 top = new Vector3(0, height, 0);
+        Handles.DrawWireArc(default,Vector3.up,vLeft,fovDeg,outterRadius-innerRadius);
+        Handles.DrawWireArc(top,Vector3.up,vLeft,fovDeg,outterRadius-innerRadius);
         Handles.DrawWireArc(default,Vector3.up,vLeft,fovDeg,outterRadius);
         Handles.DrawWireArc(top,Vector3.up,vLeft,fovDeg,outterRadius);
         // Handles.DrawWireDisc(default, Vector3.up, outterRadius);
@@ -106,7 +108,7 @@ public class CheesyScript : MonoBehaviour
 
         //cylindercal raidal check
 
-        if (flatDirection > outterRadius) return false; //out of outterRadius range
+        if (flatDirection > outterRadius && flatDirection>innerRadius) return false; //out of outterRadius range
         
         //height check
         if (vecToTarget.y < 0 || vecToTarget.y > height) return false; //out of height range
