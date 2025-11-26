@@ -34,8 +34,8 @@ public class CheesyScript : MonoBehaviour
         //Condition for the trigger
         Gizmos.color = Handles.color = Contains(target.position) ? Color.red : Color.white;
 
-        //contains
-        if (Contains(target.position) == true)
+        //contains the bool of other clase and make it true when contains == true
+        if (Contains(target.position))
         {
             TrigLaser.inTrigger = true;
         }
