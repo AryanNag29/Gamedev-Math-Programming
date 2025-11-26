@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CheesyScript : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class CheesyScript : MonoBehaviour
     #endregion
 
     #region Variables 
-    public float radius = 1;
+    [FormerlySerializedAs("radius")] //unity will remember the variable as it formal name even you changed the name
+    public float outterRadius = 1;
     public float height = 1;
     [Range(0, 180)] //quite usefull for the range base slider
     public float fovDeg = 45f; //an actual angle
