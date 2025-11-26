@@ -9,6 +9,7 @@ public class CheesyScript : MonoBehaviour
 {
     #region PublicReferences
     public Transform target;
+    public laser TrigLaser;
     #endregion
 
     #region Variables 
@@ -32,7 +33,16 @@ public class CheesyScript : MonoBehaviour
         Gizmos.matrix = Handles.matrix = transform.localToWorldMatrix;
         //Condition for the trigger
         Gizmos.color = Handles.color = Contains(target.position) ? Color.red : Color.white;
-        
+
+        //contains
+        if (Contains(target.position) == true)
+        {
+            TrigLaser.inTrigger = true;
+        }
+        else
+        {
+            TrigLaser.inTrigger = false;
+        }
         //Drawing the angle(pythagoras theorem)
         float p = angleThresh;
         float x = Mathf.Sqrt(1 - p * p);
