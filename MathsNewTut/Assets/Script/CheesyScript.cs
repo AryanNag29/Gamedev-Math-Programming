@@ -35,8 +35,8 @@ public class CheesyScript : MonoBehaviour
     #endregion
 
     #region Properties
-    float fovRed=>fovDeg*Mathf.Deg2Rad;
-    float angleThresh => Mathf.Cos(fovRed/2);
+    float fovRed => fovDeg * Mathf.Deg2Rad;
+    float angleThresh => Mathf.Cos(fovRed / 2);
 
     #endregion
 
@@ -49,42 +49,53 @@ public class CheesyScript : MonoBehaviour
         //Condition for the trigger
         Gizmos.color = Handles.color = WedgeContains(target.position) ? Color.red : Color.white;
 
-        switch(shape)
+        switch (shape)
         {
-           case Shape.WedgeSector:
-            DrawWedgeGizmos();
-            break;
-           case Shape.Spherical:
-           DrawSphereGismos();
-           break; 
+            case Shape.WedgeSector:
+                DrawWedgeGizmos();
+                break;
+            case Shape.Spherical:
+                DrawSphereGismos();
+                break;
         }
 
     }
-    
+
     #endregion
 
     #region Function
-    public bool Contains(Vector3 position)=>
+    public bool Contains(Vector3 position) =>
         shape switch
-       {
+        {
             Shape.WedgeSector => WedgeContains(position),
-            Shape.Spherical => SphereContains(position),   
+            Shape.Spherical => SphereContains(position),
             _ => throw new NotImplementedException()
-       };
-   
+        };
 
+    //Sphere conditon and gismos
     public bool SphereContains(Vector3 position)
     {
-        float dis = Vector3.Distance(transform.position,position);
-
-        return dis > outterRadius || dis < innerRadius;
+        float dis = Vector3.Distance(transform.position, position);
+        if (dis > outterRadius || dis < innerRadius) return false;
+        return true;
     }
 
     public void DrawSphereGismos()
     {
-        
+        //Later
+        // if (SphereContains(target.position))
+        // {
+        //     TrigLaser.inTrigger = true;
+        // }
+        // else
+        // {
+        //     TrigLaser.inTrigger = false;
+        // }
+        Gizmos.DrawWireSphere(default, innerRadius);
+        Gizmos.DrawWireSphere(default, outterRadius);
     }
-
+    
+    //wedge conditon and gizmos
     public bool WedgeContains(Vector3 position)
     {
 
@@ -101,8 +112,8 @@ public class CheesyScript : MonoBehaviour
 
 
         //cylindercal raidal check
-        if (flatDirection > outterRadius || flatDirection<innerRadius) return false; //out of outterRadius range
-        
+        if (flatDirection > outterRadius || flatDirection < innerRadius) return false; //out of outterRadius range
+
         //height check
         if (vecToTarget.y < 0 || vecToTarget.y > height) return false; //out of height range
 
@@ -137,16 +148,16 @@ public class CheesyScript : MonoBehaviour
         Vector3 vRightInner = vRightDir * innerRadius;
 
         Vector3 top = new Vector3(0, height, 0);
-        Handles.DrawWireArc(default,Vector3.up,vLeftInner,fovDeg,innerRadius);
-        Handles.DrawWireArc(top,Vector3.up,vLeftInner,fovDeg,innerRadius);
-        Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,outterRadius);
-        Handles.DrawWireArc(top,Vector3.up,vLeftOutter,fovDeg,outterRadius);
+        Handles.DrawWireArc(default, Vector3.up, vLeftInner, fovDeg, innerRadius);
+        Handles.DrawWireArc(top, Vector3.up, vLeftInner, fovDeg, innerRadius);
+        Handles.DrawWireArc(default, Vector3.up, vLeftOutter, fovDeg, outterRadius);
+        Handles.DrawWireArc(top, Vector3.up, vLeftOutter, fovDeg, outterRadius);
         // Handles.DrawWireDisc(default, Vector3.up, outterRadius);
         // Handles.DrawWireDisc(top, Vector3.up, outterRadius);
         Gizmos.DrawLine(vLeftInner, vLeftOutter);
         Gizmos.DrawLine(vRightInner, vRightOutter);
-        Gizmos.DrawLine(top+vLeftInner,top+vLeftOutter);
-        Gizmos.DrawLine(top+vRightInner,top+vRightOutter);
+        Gizmos.DrawLine(top + vLeftInner, top + vLeftOutter);
+        Gizmos.DrawLine(top + vRightInner, top + vRightOutter);
 
         Gizmos.DrawLine(top + vLeftInner, vLeftInner);
         Gizmos.DrawLine(top + vRightInner, vRightInner);
@@ -154,8 +165,17 @@ public class CheesyScript : MonoBehaviour
         Gizmos.DrawLine(vRightOutter, top + vRightOutter);
     }
 
+    public bool SphericalSectorContains(Vector3 position)
+    {
+        return true;
+    }   
+    public void DrawSphericalSectorGizmos()
+    {
+        
+    }
+
     #endregion
 
 
-  
+
 }

@@ -25,13 +25,13 @@ public class TurretRotation : MonoBehaviour
     void Update()
     {
         //snell's law using unity plane type
-        Plane plane = new Plane(Vector3.up , Vector3.zero);
-        Ray ray = default; 
-        if(plane.Raycast(ray , out float dist))
+        Plane plane = new Plane(Vector3.up, Vector3.zero);
+        Ray ray = default;
+        if (plane.Raycast(ray, out float dist))
         {
             Vector3 lightIntersection = ray.GetPoint(dist);
         }
-        
+
 
         float angleDeg = 45f;
         float angleRad = angleDeg * Mathf.Deg2Rad; // 360/6.28
@@ -40,10 +40,10 @@ public class TurretRotation : MonoBehaviour
         {
             //note: worldspace rotation
             Vector3 vecToTargetgun = target.position - gunTf.position;
-            TargetRotation = Quaternion.LookRotation(vecToTargetgun, transform.up); 
-        }     
-            //smoothing rotation towards target using slerp  (make this outsize of condition)
-            gunTf.rotation = Quaternion.Slerp(gunTf.rotation, TargetRotation,smoothingFector*Time.deltaTime);
+            TargetRotation = Quaternion.LookRotation(vecToTargetgun, transform.up);
+        }
+        //smoothing rotation towards target using slerp  (make this outsize of condition)
+        gunTf.rotation = Quaternion.Slerp(gunTf.rotation, TargetRotation, smoothingFector * Time.deltaTime);
     }
     #endregion
 
