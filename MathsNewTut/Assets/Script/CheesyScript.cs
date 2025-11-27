@@ -8,6 +8,12 @@ using UnityEngine.Serialization;
 
 public class CheesyScript : MonoBehaviour
 {
+    #region Enum
+    public enum Type
+    {
+        
+    }
+    #endregion
     #region PublicReferences
     public Transform target;
     public laser TrigLaser;
