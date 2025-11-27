@@ -9,17 +9,21 @@ using UnityEngine.Serialization;
 public class CheesyScript : MonoBehaviour
 {
     #region Enum
-    public enum Type
+    public enum Shape
     {
-        
+        CylindricalSector,
+        Spherical,
+        SphericalSector
     }
     #endregion
+
     #region PublicReferences
     public Transform target;
     public laser TrigLaser;
     #endregion
 
     #region Variables 
+    public Shape shape; //enum variable
     [FormerlySerializedAs("radius")] //unity will remember the variable as it formal name even you changed the name
     public float outterRadius = 1;
     public float innerRadius = 0.2f;
