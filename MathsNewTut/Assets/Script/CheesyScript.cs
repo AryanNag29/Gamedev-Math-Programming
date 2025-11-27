@@ -2,6 +2,7 @@ using System;
 using JetBrains.Annotations;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -48,46 +49,15 @@ public class CheesyScript : MonoBehaviour
         //Condition for the trigger
         Gizmos.color = Handles.color = WedgeContains(target.position) ? Color.red : Color.white;
 
-        //contains the bool of other clase and make it true when contains == true
-        if (WedgeContains(target.position))
+        switch(shape)
         {
-            TrigLaser.inTrigger = true;
+           case Shape.WedgeSector:
+            DrawWedgeGizmos();
+            break;
+           case Shape.Spherical:
+           DrawSphereGismos();
+           break; 
         }
-        else
-        {
-            TrigLaser.inTrigger = false;
-        }
-        //Drawing the angle(pythagoras theorem)
-        float p = angleThresh;
-        float x = Mathf.Sqrt(1 - p * p);
-
-        Vector3 vLefDir = new Vector3(-x, 0, p);
-        Vector3 vRightDir = new Vector3(x, 0, p);
-        Vector3 vLeftOutter = vLefDir * outterRadius;
-        Vector3 vRightOutter = vRightDir * outterRadius;
-        Vector3 vLeftInner = vLefDir * innerRadius;
-        Vector3 vRightInner = vRightDir * innerRadius;
-
-        Vector3 top = new Vector3(0, height, 0);
-        Handles.DrawWireArc(default,Vector3.up,vLeftInner,fovDeg,innerRadius);
-        Handles.DrawWireArc(top,Vector3.up,vLeftInner,fovDeg,innerRadius);
-        Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,outterRadius);
-        Handles.DrawWireArc(top,Vector3.up,vLeftOutter,fovDeg,outterRadius);
-        // Handles.DrawWireDisc(default, Vector3.up, outterRadius);
-        // Handles.DrawWireDisc(top, Vector3.up, outterRadius);
-
-        
-
-        ;
-        Gizmos.DrawLine(vLeftInner, vLeftOutter);
-        Gizmos.DrawLine(vRightInner, vRightOutter);
-        Gizmos.DrawLine(top+vLeftInner,top+vLeftOutter);
-        Gizmos.DrawLine(top+vRightInner,top+vRightOutter);
-
-        Gizmos.DrawLine(top + vLeftInner, vLeftInner);
-        Gizmos.DrawLine(top + vRightInner, vRightInner);
-        Gizmos.DrawLine(vLeftOutter, top + vLeftOutter);
-        Gizmos.DrawLine(vRightOutter, top + vRightOutter);
 
     }
     
@@ -95,19 +65,24 @@ public class CheesyScript : MonoBehaviour
 
     #region Function
     public bool Contains(Vector3 position)=>
-    {
-       shape switch
+        shape switch
        {
             Shape.WedgeSector => WedgeContains(position),
             Shape.Spherical => SphereContains(position),   
             _ => throw new NotImplementedException()
        };
-    }
+   
 
     public bool SphereContains(Vector3 position)
     {
         float dis = Vector3.Distance(transform.position,position);
-        return;
+
+        return dis > outterRadius || dis < innerRadius;
+    }
+
+    public void DrawSphereGismos()
+    {
+        
     }
 
     public bool WedgeContains(Vector3 position)
@@ -137,6 +112,46 @@ public class CheesyScript : MonoBehaviour
 
         //if we pass all the test we are inside
         return true;
+    }
+
+    public void DrawWedgeGizmos()
+    {
+        //contains the bool of other clase and make it true when contains == true
+        if (WedgeContains(target.position))
+        {
+            TrigLaser.inTrigger = true;
+        }
+        else
+        {
+            TrigLaser.inTrigger = false;
+        }
+        //Drawing the angle(pythagoras theorem)
+        float p = angleThresh;
+        float x = Mathf.Sqrt(1 - p * p);
+
+        Vector3 vLefDir = new Vector3(-x, 0, p);
+        Vector3 vRightDir = new Vector3(x, 0, p);
+        Vector3 vLeftOutter = vLefDir * outterRadius;
+        Vector3 vRightOutter = vRightDir * outterRadius;
+        Vector3 vLeftInner = vLefDir * innerRadius;
+        Vector3 vRightInner = vRightDir * innerRadius;
+
+        Vector3 top = new Vector3(0, height, 0);
+        Handles.DrawWireArc(default,Vector3.up,vLeftInner,fovDeg,innerRadius);
+        Handles.DrawWireArc(top,Vector3.up,vLeftInner,fovDeg,innerRadius);
+        Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,outterRadius);
+        Handles.DrawWireArc(top,Vector3.up,vLeftOutter,fovDeg,outterRadius);
+        // Handles.DrawWireDisc(default, Vector3.up, outterRadius);
+        // Handles.DrawWireDisc(top, Vector3.up, outterRadius);
+        Gizmos.DrawLine(vLeftInner, vLeftOutter);
+        Gizmos.DrawLine(vRightInner, vRightOutter);
+        Gizmos.DrawLine(top+vLeftInner,top+vLeftOutter);
+        Gizmos.DrawLine(top+vRightInner,top+vRightOutter);
+
+        Gizmos.DrawLine(top + vLeftInner, vLeftInner);
+        Gizmos.DrawLine(top + vRightInner, vRightInner);
+        Gizmos.DrawLine(vLeftOutter, top + vLeftOutter);
+        Gizmos.DrawLine(vRightOutter, top + vRightOutter);
     }
 
     #endregion
