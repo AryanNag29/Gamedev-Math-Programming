@@ -99,7 +99,6 @@ public class CheesyScript : MonoBehaviour
 
 
         //cylindercal raidal check
-
         if (flatDirection > outterRadius || flatDirection<innerRadius) return false; //out of outterRadius range
         
         //height check
