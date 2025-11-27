@@ -31,12 +31,12 @@ public class TurretRotation : MonoBehaviour
         {
             Vector3 lightIntersection = ray.GetPoint(dist);
         }
-
+        
 
         float angleDeg = 45f;
         float angleRad = angleDeg * Mathf.Deg2Rad; // 360/6.28
         float againangDeg = angleRad * Mathf.Rad2Deg; //6.28/360
-        if (trigger.Contains(target.position))
+        if (trigger.WedgeContains(target.position))
         {
             //note: worldspace rotation
             Vector3 vecToTargetgun = target.position - gunTf.position;
