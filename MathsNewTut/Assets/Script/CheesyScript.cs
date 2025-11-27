@@ -94,9 +94,9 @@ public class CheesyScript : MonoBehaviour
     #endregion
 
     #region Function
-    public bool Contains(Vector3 position)
+    public bool Contains(Vector3 position)=>
     {
-       return shape switch
+       shape switch
        {
             Shape.WedgeSector => WedgeContains(position),
             Shape.Spherical => SphereContains(position),   
@@ -107,7 +107,6 @@ public class CheesyScript : MonoBehaviour
     public bool SphereContains(Vector3 position)
     {
         float dis = Vector3.Distance(transform.position,position);
-        
         return;
     }
 
