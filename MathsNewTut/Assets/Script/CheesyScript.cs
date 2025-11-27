@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Serialization;
 
 public class CheesyScript : MonoBehaviour
@@ -11,7 +12,7 @@ public class CheesyScript : MonoBehaviour
     #region Enum
     public enum Shape
     {
-        CylindricalSector,
+        WedgeSector,
         Spherical,
         SphericalSector
     }
@@ -45,10 +46,10 @@ public class CheesyScript : MonoBehaviour
         //making gizmos relative to localtoworld metrix
         Gizmos.matrix = Handles.matrix = transform.localToWorldMatrix;
         //Condition for the trigger
-        Gizmos.color = Handles.color = Contains(target.position) ? Color.red : Color.white;
+        Gizmos.color = Handles.color = WedgeContains(target.position) ? Color.red : Color.white;
 
         //contains the bool of other clase and make it true when contains == true
-        if (Contains(target.position))
+        if (WedgeContains(target.position))
         {
             TrigLaser.inTrigger = true;
         }
@@ -94,6 +95,23 @@ public class CheesyScript : MonoBehaviour
 
     #region Function
     public bool Contains(Vector3 position)
+    {
+       return shape switch
+       {
+            Shape.WedgeSector => WedgeContains(position),
+            Shape.Spherical => SphereContains(position),   
+            _ => throw new NotImplementedException()
+       };
+    }
+
+    public bool SphereContains(Vector3 position)
+    {
+        float dis = Vector3.Distance(transform.position,position);
+        
+        return;
+    }
+
+    public bool WedgeContains(Vector3 position)
     {
 
         Vector3 dirToTargetWorld = (position - transform.position);
