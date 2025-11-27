@@ -58,8 +58,8 @@ public class CheesyScript : MonoBehaviour
         Vector3 vRightInner = vRightDir * innerRadius;
 
         Vector3 top = new Vector3(0, height, 0);
-        Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,outterRadius-innerRadius);
-        Handles.DrawWireArc(top,Vector3.up,vLeftOutter,fovDeg,outterRadius-innerRadius);
+        Handles.DrawWireArc(default,Vector3.up,vLeftInner,fovDeg,innerRadius);
+        Handles.DrawWireArc(top,Vector3.up,vLeftInner,fovDeg,innerRadius);
         Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,outterRadius);
         Handles.DrawWireArc(top,Vector3.up,vLeftOutter,fovDeg,outterRadius);
         // Handles.DrawWireDisc(default, Vector3.up, outterRadius);
@@ -68,14 +68,13 @@ public class CheesyScript : MonoBehaviour
         
 
         ;
-        Gizmos.DrawRay(vLeftInner, vLeftOutter);
-        Gizmos.DrawRay(top, vLeftOutter);
+        Gizmos.DrawLine(vLeftInner, vLeftOutter);
+        Gizmos.DrawLine(vRightInner, vRightOutter);
+        Gizmos.DrawLine(top+vLeftInner,top+vLeftOutter);
+        Gizmos.DrawLine(top+vRightInner,top+vRightOutter);
 
-        
-        Gizmos.DrawRay(vRightInner, vRightOutter);
-        Gizmos.DrawRay(top, vRightOutter);
-
-        Gizmos.DrawLine(default, top);
+        Gizmos.DrawLine(top + vLeftInner, vLeftInner);
+        Gizmos.DrawLine(top + vRightInner, vRightInner);
         Gizmos.DrawLine(vLeftOutter, top + vLeftOutter);
         Gizmos.DrawLine(vRightOutter, top + vRightOutter);
 
@@ -101,7 +100,7 @@ public class CheesyScript : MonoBehaviour
 
         //cylindercal raidal check
 
-        if (flatDirection > outterRadius && flatDirection>innerRadius) return false; //out of outterRadius range
+        if (flatDirection > outterRadius || flatDirection<innerRadius) return false; //out of outterRadius range
         
         //height check
         if (vecToTarget.y < 0 || vecToTarget.y > height) return false; //out of height range
