@@ -57,6 +57,9 @@ public class CheesyScript : MonoBehaviour
             case Shape.Spherical:
                 DrawSphereGismos();
                 break;
+            case Shape.SphericalSector:
+                DrawSphericalSectorGizmos();
+                break;
         }
 
     }
@@ -69,6 +72,7 @@ public class CheesyScript : MonoBehaviour
         {
             Shape.WedgeSector => WedgeContains(position),
             Shape.Spherical => SphereContains(position),
+            Shape.SphericalSector => SphericalSectorContains(position),
             _ => throw new NotImplementedException()
         };
 
@@ -171,7 +175,8 @@ public class CheesyScript : MonoBehaviour
     }   
     public void DrawSphericalSectorGizmos()
     {
-        
+       Gizmos.DrawWireSphere(default,innerRadius);
+       Gizmos.DrawWireSphere(default,outterRadius);         
     }
 
     #endregion
