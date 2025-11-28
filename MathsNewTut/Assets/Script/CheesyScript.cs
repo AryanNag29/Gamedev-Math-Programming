@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using JetBrains.Annotations;
 using Unity.Mathematics;
@@ -8,6 +9,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Serialization;
+
 
 public class CheesyScript : MonoBehaviour
 {
@@ -25,6 +27,12 @@ public class CheesyScript : MonoBehaviour
     public laser TrigLaser;
     #endregion
 
+    #region Stack
+
+    Stack<Matrix4x4> mtx = new Stack<Matrix4x4>();
+
+    #endregion
+
     #region Variables 
     public Shape shape; //enum variable
     [FormerlySerializedAs("radius")] //unity will remember the variable as it formal name even you changed the name
@@ -39,6 +47,9 @@ public class CheesyScript : MonoBehaviour
     public float fovRed => fovDeg * Mathf.Deg2Rad;
     public float angleThresh => Mathf.Cos(fovRed / 2);
     public void SetGizmosMatrix(Matrix4x4 m) => Gizmos.matrix = Handles.matrix = m;
+
+    void Pushmtx() => mtx.Push(Gizmos.matrix);
+    void Popmtx() => SetGizmosMatrix(mtx.Pop());
     #endregion  
 
     #region Gizmos
@@ -182,14 +193,14 @@ public class CheesyScript : MonoBehaviour
         
         DrawFlatWedge();
         //This method where you temp change default value of some predefined constant and then change it back to normal is called (pushing and popping)
-        //saving the previous gizmos mtx
-        Matrix4x4 prevMtxGizmos = Gizmos.matrix;
+        //saving the previous gizmos mtx into stack
+        Pushmtx();
         //temp change the gizmos mtx
         SetGizmosMatrix(Gizmos.matrix*Matrix4x4.TRS(default,Quaternion.Euler(0,0,90),Vector3.one));
         //then draw the wedge 
         DrawFlatWedge();
-        //restoring the gizmos mtx
-        Gizmos.matrix = prevMtxGizmos;
+        //restoring the gizmos mtx from stack
+        Popmtx();
         void DrawFlatWedge()
         {
         //gizmos and handles 
