@@ -175,8 +175,19 @@ public class CheesyScript : MonoBehaviour
     }   
     public void DrawSphericalSectorGizmos()
     {
-       Gizmos.DrawWireSphere(default,innerRadius);
-       Gizmos.DrawWireSphere(default,outterRadius);         
+        float p = angleThresh;
+        float x = Mathf.Sqrt(1 - p * p);
+
+        Vector3 vLefDir = new Vector3(-x, 0, p);
+        Vector3 vRightDir = new Vector3(x, 0, p);
+        Vector3 vLeftOutter = vLefDir * outterRadius;
+        Vector3 vRightOutter = vRightDir * outterRadius;
+        Vector3 vLeftInner = vLefDir * innerRadius;
+        Vector3 vRightInner = vRightDir * innerRadius;
+
+        
+        Gizmos.DrawWireSphere(default,innerRadius);
+        Gizmos.DrawWireSphere(default,outterRadius);
     }
 
     #endregion
