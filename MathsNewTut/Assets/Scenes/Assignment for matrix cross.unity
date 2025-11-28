@@ -930,10 +930,10 @@ MonoBehaviour:
   target: {fileID: 1717583019}
   TrigLaser: {fileID: 1175758467}
   shape: 2
-  outterRadius: 30.9
+  outterRadius: 30.4
   innerRadius: 10.4
   height: 17.25
-  fovDeg: 90
+  fovDeg: 71
 --- !u!4 &1076070332
 Transform:
   m_ObjectHideFlags: 0
@@ -994,7 +994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::laser
   target: {fileID: 1717583019}
-  inTrigger: 1
+  inTrigger: 0
 --- !u!1 &1228421951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,7 +1452,7 @@ Transform:
   m_GameObject: {fileID: 1717583018}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.55, y: 2.35, z: 10.51}
+  m_LocalPosition: {x: 14.55, y: 2.07, z: 12.2}
   m_LocalScale: {x: 0.41074, y: 0.41074, z: 0.41074}
   m_ConstrainProportionsScale: 0
   m_Children: []
