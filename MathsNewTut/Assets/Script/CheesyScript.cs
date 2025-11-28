@@ -38,7 +38,8 @@ public class CheesyScript : MonoBehaviour
     #region Properties
     public float fovRed => fovDeg * Mathf.Deg2Rad;
     public float angleThresh => Mathf.Cos(fovRed / 2);
-    #endregion
+    public void SetGizmosMatrix(Matrix4x4 m) => Gizmos.matrix = Handles.matrix = m;
+    #endregion  
 
     #region Gizmos
     void OnDrawGizmos()
@@ -179,15 +180,19 @@ public class CheesyScript : MonoBehaviour
         Vector3 vLeftInner = vLefDir * innerRadius;
         Vector3 vRightInner = vRightDir * innerRadius;
         
-        //gizmos and handles 
+        DrawFlatWedge();
         
+        void DrawFlatWedge()
+        {
+        //gizmos and handles 
+        Handles.DrawWireArc(default,Vector3.up,vLeftInner,fovDeg,innerRadius);
+        Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,innerRadius);
         
         Gizmos.DrawLine(vLeftInner,vLeftOutter);
         Gizmos.DrawLine(vRightInner,vRightOutter);
         Gizmos.DrawWireSphere(default, outterRadius);
+        }
     }
     #endregion
-
-
-
+    
 }
