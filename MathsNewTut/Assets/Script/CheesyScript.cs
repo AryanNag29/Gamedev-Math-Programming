@@ -45,7 +45,7 @@ public class CheesyScript : MonoBehaviour
     void OnDrawGizmos()
     {
         //making gizmos relative to localtoworld metrix
-        Gizmos.matrix = Handles.matrix = transform.localToWorldMatrix;
+        SetGizmosMatrix(transform.localToWorldMatrix);
         //Condition for the trigger
         Gizmos.color = Handles.color = WedgeContains(target.position) ? Color.red : Color.white;
 
@@ -181,16 +181,22 @@ public class CheesyScript : MonoBehaviour
         Vector3 vRightInner = vRightDir * innerRadius;
         
         DrawFlatWedge();
-        
+        //saving the previous gizmos mtx
+        Matrix4x4 prevMtxGizmos = Gizmos.matrix;
+        //temp change the gizmos mtx
+        SetGizmosMatrix(Gizmos.matrix*Matrix4x4.TRS(default,Quaternion.Euler(0,0,90),Vector3.one));
+        //then draw the wedge 
+        DrawFlatWedge();
+        //restoring the gizmos mtx
+        Gizmos.matrix = prevMtxGizmos;
         void DrawFlatWedge()
         {
         //gizmos and handles 
         Handles.DrawWireArc(default,Vector3.up,vLeftInner,fovDeg,innerRadius);
-        Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,innerRadius);
+        Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,outterRadius);
         
         Gizmos.DrawLine(vLeftInner,vLeftOutter);
         Gizmos.DrawLine(vRightInner,vRightOutter);
-        Gizmos.DrawWireSphere(default, outterRadius);
         }
     }
     #endregion
