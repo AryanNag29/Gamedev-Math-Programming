@@ -181,6 +181,7 @@ public class CheesyScript : MonoBehaviour
         Vector3 vRightInner = vRightDir * innerRadius;
         
         DrawFlatWedge();
+        //This method where you temp change default value of some predefined constant and then change it back to normal is called (pushing and popping)
         //saving the previous gizmos mtx
         Matrix4x4 prevMtxGizmos = Gizmos.matrix;
         //temp change the gizmos mtx
