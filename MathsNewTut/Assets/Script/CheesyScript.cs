@@ -30,6 +30,8 @@ public class CheesyScript : MonoBehaviour
     #region Stack
 
     Stack<Matrix4x4> mtx = new Stack<Matrix4x4>();
+    void Pushmtx() => mtx.Push(Gizmos.matrix);
+    void Popmtx() => SetGizmosMatrix(mtx.Pop());
 
     #endregion
 
@@ -47,9 +49,6 @@ public class CheesyScript : MonoBehaviour
     public float fovRed => fovDeg * Mathf.Deg2Rad;
     public float angleThresh => Mathf.Cos(fovRed / 2);
     public void SetGizmosMatrix(Matrix4x4 m) => Gizmos.matrix = Handles.matrix = m;
-
-    void Pushmtx() => mtx.Push(Gizmos.matrix);
-    void Popmtx() => SetGizmosMatrix(mtx.Pop());
     #endregion  
 
     #region Gizmos
