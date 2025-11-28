@@ -37,11 +37,9 @@ public class CheesyScript : MonoBehaviour
     #region Properties
     float fovRed => fovDeg * Mathf.Deg2Rad;
     float angleThresh => Mathf.Cos(fovRed / 2);
-
     #endregion
 
     #region Gizmos
-
     void OnDrawGizmos()
     {
         //making gizmos relative to localtoworld metrix
@@ -62,7 +60,6 @@ public class CheesyScript : MonoBehaviour
                 break;
         }
     }
-
     #endregion
 
     #region Function
@@ -168,18 +165,17 @@ public class CheesyScript : MonoBehaviour
     {
         return true;
     }
+
     public void DrawSphericalSectorGizmos()
     {
         float p = angleThresh;
         float x = Mathf.Sqrt(1 - p * p);
-
         Vector3 vLefDir = new Vector3(-x, 0, p);
         Vector3 vRightDir = new Vector3(x, 0, p);
         Vector3 vLeftOutter = vLefDir * outterRadius;
         Vector3 vRightOutter = vRightDir * outterRadius;
         Vector3 vLeftInner = vLefDir * innerRadius;
         Vector3 vRightInner = vRightDir * innerRadius;
-
         //gizmos
         Gizmos.DrawWireSphere(default, innerRadius);
         Gizmos.DrawWireSphere(default, outterRadius);
