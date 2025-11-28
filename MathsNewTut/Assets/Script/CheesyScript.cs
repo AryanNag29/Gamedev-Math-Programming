@@ -36,8 +36,8 @@ public class CheesyScript : MonoBehaviour
     #endregion
 
     #region Properties
-    float fovRed => fovDeg * Mathf.Deg2Rad;
-    float angleThresh => Mathf.Cos(fovRed / 2);
+    public float fovRed => fovDeg * Mathf.Deg2Rad;
+    public float angleThresh => Mathf.Cos(fovRed / 2);
     #endregion
 
     #region Gizmos
@@ -171,25 +171,19 @@ public class CheesyScript : MonoBehaviour
     {
         float p = angleThresh;
         float x = Mathf.Sqrt(1 - p * p);
-        Vector3 vLefDir = new Vector3(-x, p, 0);
-        Vector3 vRightDir = new Vector3(x, p, 0);
+        float completeArkDeg = 180f;
+        Vector3 vLefDir = new Vector3(-x, 0, p);
+        Vector3 vRightDir = new Vector3(x, 0, p);
         Vector3 vLeftOutter = vLefDir * outterRadius;
         Vector3 vRightOutter = vRightDir * outterRadius;
         Vector3 vLeftInner = vLefDir * innerRadius;
         Vector3 vRightInner = vRightDir * innerRadius;
+        
         //gizmos and handles 
-        Handles.DrawWireArc(default,Vector3.up,vLeftInner, fovDeg, innerRadius);
-        Handles.DrawWireArc(default,Vector3.up,vRightInner, fovDeg, innerRadius);
-        Handles.DrawWireArc(default,Vector3.up,vLeftInner,fovDeg+fovDeg,innerRadius);
-        Handles.DrawWireArc(default,Vector3.up,vRightInner,fovDeg+fovDeg,innerRadius);
-        Handles.DrawWireArc(default, Vector3.up, vLeftOutter, fovDeg, outterRadius);
-        Handles.DrawWireArc(default, Vector3.up, vRightOutter, fovDeg, outterRadius);
-        Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg+fovDeg,outterRadius);
-        Handles.DrawWireArc(default,Vector3.up,vRightOutter,fovDeg+fovDeg,outterRadius);
+        
         
         Gizmos.DrawLine(vLeftInner,vLeftOutter);
         Gizmos.DrawLine(vRightInner,vRightOutter);
-        Gizmos.DrawWireSphere(default, innerRadius);
         Gizmos.DrawWireSphere(default, outterRadius);
     }
     #endregion
