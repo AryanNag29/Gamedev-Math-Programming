@@ -86,4 +86,7 @@ public class NotesCode : MonoBehaviour
     //     Gizmos.DrawWireSphere(default, outterRadius);
     // }
     }
+    
+    stack<Matrix4x4> m = new Stack<Matrix4x4>();// pushing and popping method using stack 
+    Matrix4x4 mat = Matrix4x4.identity;
 }
