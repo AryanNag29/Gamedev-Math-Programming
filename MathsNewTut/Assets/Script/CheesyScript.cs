@@ -61,7 +61,6 @@ public class CheesyScript : MonoBehaviour
                 DrawSphericalSectorGizmos();
                 break;
         }
-
     }
 
     #endregion
@@ -86,7 +85,7 @@ public class CheesyScript : MonoBehaviour
 
     public void DrawSphereGismos()
     {
-        //Later
+        // Later
         // if (SphereContains(target.position))
         // {
         //     TrigLaser.inTrigger = true;
@@ -98,11 +97,10 @@ public class CheesyScript : MonoBehaviour
         Gizmos.DrawWireSphere(default, innerRadius);
         Gizmos.DrawWireSphere(default, outterRadius);
     }
-    
+
     //wedge conditon and gizmos
     public bool WedgeContains(Vector3 position)
     {
-
         Vector3 dirToTargetWorld = (position - transform.position);
 
         //InverseTransformVector is  world to local
@@ -113,14 +111,11 @@ public class CheesyScript : MonoBehaviour
         flatDirToTarget.y = 0;
         flatDirToTarget /= flatDirection;
 
-
-
         //cylindercal raidal check
         if (flatDirection > outterRadius || flatDirection < innerRadius) return false; //out of outterRadius range
 
         //height check
         if (vecToTarget.y < 0 || vecToTarget.y > height) return false; //out of height range
-
 
         //angular checks
         if (flatDirToTarget.z < angleThresh) return false; //out of angular range
@@ -172,7 +167,7 @@ public class CheesyScript : MonoBehaviour
     public bool SphericalSectorContains(Vector3 position)
     {
         return true;
-    }   
+    }
     public void DrawSphericalSectorGizmos()
     {
         float p = angleThresh;
@@ -185,11 +180,10 @@ public class CheesyScript : MonoBehaviour
         Vector3 vLeftInner = vLefDir * innerRadius;
         Vector3 vRightInner = vRightDir * innerRadius;
 
-        
-        Gizmos.DrawWireSphere(default,innerRadius);
-        Gizmos.DrawWireSphere(default,outterRadius);
+        //gizmos
+        Gizmos.DrawWireSphere(default, innerRadius);
+        Gizmos.DrawWireSphere(default, outterRadius);
     }
-
     #endregion
 
 
