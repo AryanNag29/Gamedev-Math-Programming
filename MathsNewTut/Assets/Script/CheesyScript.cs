@@ -175,6 +175,13 @@ public class CheesyScript : MonoBehaviour
 
     public bool SphericalSectorContains(Vector3 position)
     {
+        //sphere check
+        if (SphereContains(position) == false)
+        {
+            return false;
+        };
+        //Angular check
+        
         return true;
     }
 
@@ -184,7 +191,6 @@ public class CheesyScript : MonoBehaviour
         
         float p = angleThresh;
         float x = Mathf.Sqrt(1 - p * p);
-        float completeArkDeg = 180f;
         Vector3 vLefDir = new Vector3(-x, 0, p);
         Vector3 vRightDir = new Vector3(x, 0, p);
         Vector3 vLeftOutter = vLefDir * outterRadius;
