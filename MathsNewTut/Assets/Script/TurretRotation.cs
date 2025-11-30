@@ -36,12 +36,12 @@ public class TurretRotation : MonoBehaviour
         float angleDeg = 45f;
         float angleRad = angleDeg * Mathf.Deg2Rad; // 360/6.28
         float againangDeg = angleRad * Mathf.Rad2Deg; //6.28/360
-        if (trigger.WedgeContains(target.position))
+        if (trigger.Contains(target.position))
         {
             //note: worldspace rotation
             Vector3 vecToTargetgun = target.position - gunTf.position;
             TargetRotation = Quaternion.LookRotation(vecToTargetgun, transform.up);
-        }
+        }else{}
         //smoothing rotation towards target using slerp  (make this outsize of condition)
         gunTf.rotation = Quaternion.Slerp(gunTf.rotation, TargetRotation, smoothingFector * Time.deltaTime);
     }

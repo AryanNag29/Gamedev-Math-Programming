@@ -57,7 +57,7 @@ public class CheesyScript : MonoBehaviour
         //making gizmos relative to localtoworld metrix
         SetGizmosMatrix(transform.localToWorldMatrix);
         //Condition for the trigger
-        Gizmos.color = Handles.color = WedgeContains(target.position) ? Color.red : Color.white;
+        Gizmos.color = Handles.color = Contains(target.position) ? Color.red : Color.white;
 
         switch (shape)
         {
@@ -75,34 +75,25 @@ public class CheesyScript : MonoBehaviour
     #endregion
 
     #region Function
-    public bool Contains(Vector3 position) =>
-        shape switch
-        {
-            Shape.WedgeSector => WedgeContains(position),
-            Shape.Spherical => SphereContains(position),
-            Shape.SphericalSector => SphericalSectorContains(position),
-            _ => throw new NotImplementedException()
+    public bool Contains( Vector3 position ) =>
+        shape switch {
+            Shape.WedgeSector     => WedgeContains( position ),
+            Shape.Spherical => SphereContains( position ),
+            Shape.SphericalSector      => SphereContains( position ),
+            _               => throw new IndexOutOfRangeException()
         };
 
     //Sphere conditon and gismos
     public bool SphereContains(Vector3 position)
     {
-        float dis = Vector3.Distance(transform.position, position);
-        if (dis > outterRadius || dis < innerRadius) return false;
-        return true;
+        float distance = Vector3.Distance( transform.position, position );
+        return distance >= innerRadius && distance <= outterRadius;
+        
     }
 
     public void DrawSphereGismos()
     {
-        // Later
-        // if (SphereContains(target.position))
-        // {
-        //     TrigLaser.inTrigger = true;
-        // }
-        // else
-        // {
-        //     TrigLaser.inTrigger = false;
-        // }
+        
         Gizmos.DrawWireSphere(default, innerRadius);
         Gizmos.DrawWireSphere(default, outterRadius);
     }
@@ -173,16 +164,24 @@ public class CheesyScript : MonoBehaviour
         Gizmos.DrawLine(vRightOutter, top + vRightOutter);
     }
 
+    static float AngleBetweenNormalizedVectors( Vector3 a, Vector3 b ) {
+        return Mathf.Acos( Mathf.Clamp( Vector3.Dot( a, b ), -1, 1 ) );
+    }
     public bool SphericalSectorContains(Vector3 position)
     {
-        //sphere check
-        if (SphereContains(position) == false)
+        if( SphereContains( position ) == false )
+            return false;
+        Vector3 dirToTarget = ( position - transform.position ).normalized;
+        float angleRad = AngleBetweenNormalizedVectors( transform.forward, dirToTarget );
+        if (angleRad < fovRed / 2)
+        {
+            return true;
+        }
+        else
         {
             return false;
-        };
-        //Angular check
-        
-        return true;
+        }
+
     }
 
     public void DrawSphericalSectorGizmos()
@@ -209,14 +208,9 @@ public class CheesyScript : MonoBehaviour
         Gizmos.DrawLine(vRightInner,vRightOutter);
         }
         DrawFlatWedge();
-        //This method where you temp change default value of some predefined constant and then change it back to normal is called (pushing and popping)
-        //saving the previous gizmos mtx into stack
-        Pushmtx();
-        //temp change the gizmos mtx
-        SetGizmosMatrix(Gizmos.matrix*Matrix4x4.TRS(default,Quaternion.Euler(0,0,90),Vector3.one));
-        //then draw the wedge 
+        Pushmtx(); // saves the current matrix to the stack
+        SetGizmosMatrix( Gizmos.matrix * Matrix4x4.TRS( default, Quaternion.Euler( 0, 0, 90 ), Vector3.one ) );
         DrawFlatWedge();
-        //restoring the gizmos mtx from stack
         Popmtx();
         
         //radius
