@@ -180,6 +180,8 @@ public class CheesyScript : MonoBehaviour
 
     public void DrawSphericalSectorGizmos()
     {
+
+        
         float p = angleThresh;
         float x = Mathf.Sqrt(1 - p * p);
         float completeArkDeg = 180f;
@@ -190,6 +192,16 @@ public class CheesyScript : MonoBehaviour
         Vector3 vLeftInner = vLefDir * innerRadius;
         Vector3 vRightInner = vRightDir * innerRadius;
         
+        //arcs
+        void DrawFlatWedge()
+        {
+        //gizmos and handles 
+        Handles.DrawWireArc(default,Vector3.up,vLeftInner,fovDeg,innerRadius);
+        Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,outterRadius);
+        
+        Gizmos.DrawLine(vLeftInner,vLeftOutter);
+        Gizmos.DrawLine(vRightInner,vRightOutter);
+        }
         DrawFlatWedge();
         //This method where you temp change default value of some predefined constant and then change it back to normal is called (pushing and popping)
         //saving the previous gizmos mtx into stack
@@ -200,15 +212,19 @@ public class CheesyScript : MonoBehaviour
         DrawFlatWedge();
         //restoring the gizmos mtx from stack
         Popmtx();
-        void DrawFlatWedge()
-        {
-        //gizmos and handles 
-        Handles.DrawWireArc(default,Vector3.up,vLeftInner,fovDeg,innerRadius);
-        Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,outterRadius);
         
-        Gizmos.DrawLine(vLeftInner,vLeftOutter);
-        Gizmos.DrawLine(vRightInner,vRightOutter);
+        //radius
+        void Drawring(float coneRadius)
+        {
+            float a = fovRed / 2;
+            //Making circle on the ark
+            float dist = coneRadius * Mathf.Cos(a);
+            float radius = coneRadius * Mathf.Sin(a);
+            Vector3 center = new Vector3(0, 0, dist);
+            Handles.DrawWireDisc(center,Vector3.forward,radius);
         }
+        Drawring(innerRadius);
+        Drawring(outterRadius);
     }
     #endregion
     
