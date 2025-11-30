@@ -30,8 +30,8 @@ public class CheesyScript : MonoBehaviour
     #region Stack
 
     Stack<Matrix4x4> mtx = new Stack<Matrix4x4>();
-    void Pushmtx() => mtx.Push(Gizmos.matrix);
-    void Popmtx() => SetGizmosMatrix(mtx.Pop());
+    void Pushmtx() => mtx.Push(Gizmos.matrix);//pushing the matrix into stack
+    void Popmtx() => SetGizmosMatrix(mtx.Pop());//popping the matrix from the stack and restoring the matrix into it's original form
 
     #endregion
 
