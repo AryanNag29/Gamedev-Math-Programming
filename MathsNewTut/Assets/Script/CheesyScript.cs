@@ -44,8 +44,6 @@ public class CheesyScript : MonoBehaviour
     public float height = 1;
     [Range(0, 180)] //quite usefull for the range base slider
     public float fovDeg = 45f; //an actual angle
-
-    public bool isConeon = true;
     #endregion
 
     #region Properties
@@ -61,6 +59,15 @@ public class CheesyScript : MonoBehaviour
         SetGizmosMatrix(transform.localToWorldMatrix);
         //Condition for the trigger
         Gizmos.color = Handles.color = Contains(target.position) ? Color.red : Color.white;
+        
+        if (Contains(target.position))
+        {
+            TrigLaser.inTrigger = true;
+        }
+        else
+        {
+            TrigLaser.inTrigger = false;
+        }
 
         switch (shape)
         {
@@ -78,75 +85,54 @@ public class CheesyScript : MonoBehaviour
     #endregion
 
     #region Function
-    public bool Contains( Vector3 position ) =>
-        shape switch {
-            Shape.WedgeSector => WedgeContains( position ),
-            Shape.SphericalSector => SphereContains( position ),
-            Shape.Spherical => SphereContains( position ),
-            _ => throw new IndexOutOfRangeException()
-        };
-
-    //Sphere conditon and gismos
-    public bool SphereContains(Vector3 position)
+    public void DrawSphericalSectorGizmos()
     {
-        Vector3 dirToTargetWorld = (position - transform.position);
-        Vector3 dirToTargetLocal = transform.InverseTransformVector(dirToTargetWorld);
-        float distance = dirToTargetLocal.magnitude;
-        return distance >= innerRadius && distance <= outterRadius;
+        float p = angleThresh;
+        float x = Mathf.Sqrt(1 - p * p);
+        Vector3 vLefDir = new Vector3(-x, 0, p);
+        Vector3 vRightDir = new Vector3(x, 0, p);
+        Vector3 vLeftOutter = vLefDir * outterRadius;
+        Vector3 vRightOutter = vRightDir * outterRadius;
+        Vector3 vLeftInner = vLefDir * innerRadius;
+        Vector3 vRightInner = vRightDir * innerRadius;
         
+        //arcs
+        void DrawFlatWedge()
+        {
+            //gizmos and handles 
+            Handles.DrawWireArc(default,Vector3.up,vLeftInner,fovDeg,innerRadius);
+            Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,outterRadius);
+        
+            Gizmos.DrawLine(vLeftInner,vLeftOutter);
+            Gizmos.DrawLine(vRightInner,vRightOutter);
+        }
+        DrawFlatWedge();
+        Pushmtx(); // saves the current matrix to the stack
+        SetGizmosMatrix( Gizmos.matrix * Matrix4x4.TRS( default, Quaternion.Euler( 0, 0, 90 ), Vector3.one ) );
+        DrawFlatWedge();
+        Popmtx();
+        
+        //radius
+        void Drawring(float coneRadius)
+        {
+            float a = fovRed / 2;
+            //Making circle on the ark
+            float dist = coneRadius * Mathf.Cos(a);
+            float radius = coneRadius * Mathf.Sin(a);
+            Vector3 center = new Vector3(0, 0, dist);
+            Handles.DrawWireDisc(center,Vector3.forward,radius);
+        }
+        Drawring(innerRadius);
+        Drawring(outterRadius);
     }
-
     public void DrawSphereGismos()
     {
-        if (SphereContains(target.position))
-        {
-            TrigLaser.inTrigger = true;
-        }
-        else
-        {
-            TrigLaser.inTrigger = false;
-        }
+   
         Gizmos.DrawWireSphere(default, innerRadius);
         Gizmos.DrawWireSphere(default, outterRadius);
     }
-
-    //wedge conditon and gizmos
-    public bool WedgeContains(Vector3 position)
-    {
-        Vector3 dirToTargetWorld = (position - transform.position);
-
-        //InverseTransformVector is  world to local
-        Vector3 vecToTarget = transform.InverseTransformVector(dirToTargetWorld);
-
-        Vector3 flatDirToTarget = vecToTarget;
-        float flatDirection = flatDirToTarget.magnitude;
-        flatDirToTarget.y = 0;
-        flatDirToTarget /= flatDirection;
-
-        //cylindercal raidal check
-        if (flatDirection > outterRadius || flatDirection < innerRadius) return false; //out of outterRadius range
-
-        //height check
-        if (vecToTarget.y < 0 || vecToTarget.y > height) return false; //out of height range
-
-        //angular checks
-        if (flatDirToTarget.z < angleThresh) return false; //out of angular range
-
-        //if we pass all the test we are inside
-        return true;
-    }
-
     public void DrawWedgeGizmos()
     {
-        //contains the bool of other clase and make it true when contains == true
-        if (WedgeContains(target.position))
-        {
-            TrigLaser.inTrigger = true;
-        }
-        else
-        {
-            TrigLaser.inTrigger = false;
-        }
         //Drawing the angle(pythagoras theorem)
         float p = angleThresh;
         float x = Mathf.Sqrt(1 - p * p);
@@ -175,67 +161,60 @@ public class CheesyScript : MonoBehaviour
         Gizmos.DrawLine(vLeftOutter, top + vLeftOutter);
         Gizmos.DrawLine(vRightOutter, top + vRightOutter);
     }
-
+    public bool Contains( Vector3 position ) =>
+        shape switch {
+            Shape.WedgeSector => WedgeContains( position ),
+            Shape.SphericalSector => SphereContains( position ),
+            Shape.Spherical => SphereContains( position ),
+            _               => throw new IndexOutOfRangeException()
+        };
     static float AngleBetweenNormalizedVectors( Vector3 a, Vector3 b ) {
         return Mathf.Acos( Mathf.Clamp( Vector3.Dot( a, b ), -1, 1 ) );
     }
+
     public bool SphericalSectorContains(Vector3 position)
     {
+        if( SphereContains( position ) == false )
+            return false;
         Vector3 dirToTarget = ( position - transform.position ).normalized;
         float angleRad = AngleBetweenNormalizedVectors( transform.forward, dirToTarget );
-        if (SphereContains(position) == false) return false;
-        return angleRad < fovRed/2;
+        return angleRad < fovRed / 2;
     }
-
-    public void DrawSphericalSectorGizmos()
+    //Sphere conditon and gismos
+    public bool SphereContains(Vector3 position)
     {
-        if (SphericalSectorContains(target.position))
-        {
-            TrigLaser.inTrigger = true;
-        }
-        else
-        {
-            TrigLaser.inTrigger = false;
-        }
+        Vector3 dirToTargetWorld = (position - transform.position);
+        Vector3 dirToTargetLocal = transform.InverseTransformVector(dirToTargetWorld);
+        float distance = dirToTargetLocal.magnitude;
+        return distance >= innerRadius && distance <= outterRadius;
         
-        float p = angleThresh;
-        float x = Mathf.Sqrt(1 - p * p);
-        Vector3 vLefDir = new Vector3(-x, 0, p);
-        Vector3 vRightDir = new Vector3(x, 0, p);
-        Vector3 vLeftOutter = vLefDir * outterRadius;
-        Vector3 vRightOutter = vRightDir * outterRadius;
-        Vector3 vLeftInner = vLefDir * innerRadius;
-        Vector3 vRightInner = vRightDir * innerRadius;
-        
-        //arcs
-        void DrawFlatWedge()
-        {
-        //gizmos and handles 
-        Handles.DrawWireArc(default,Vector3.up,vLeftInner,fovDeg,innerRadius);
-        Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,outterRadius);
-        
-        Gizmos.DrawLine(vLeftInner,vLeftOutter);
-        Gizmos.DrawLine(vRightInner,vRightOutter);
-        }
-        DrawFlatWedge();
-        Pushmtx(); // saves the current matrix to the stack
-        SetGizmosMatrix( Gizmos.matrix * Matrix4x4.TRS( default, Quaternion.Euler( 0, 0, 90 ), Vector3.one ) );
-        DrawFlatWedge();
-        Popmtx();
-        
-        //radius
-        void Drawring(float coneRadius)
-        {
-            float a = fovRed / 2;
-            //Making circle on the ark
-            float dist = coneRadius * Mathf.Cos(a);
-            float radius = coneRadius * Mathf.Sin(a);
-            Vector3 center = new Vector3(0, 0, dist);
-            Handles.DrawWireDisc(center,Vector3.forward,radius);
-        }
-        Drawring(innerRadius);
-        Drawring(outterRadius);
     }
+    //wedge conditon and gizmos
+    public bool WedgeContains(Vector3 position)
+    {
+        Vector3 dirToTargetWorld = (position - transform.position);
+
+        //InverseTransformVector is  world to local
+        Vector3 vecToTarget = transform.InverseTransformVector(dirToTargetWorld);
+
+        Vector3 flatDirToTarget = vecToTarget;
+        float flatDirection = flatDirToTarget.magnitude;
+        flatDirToTarget.y = 0;
+        flatDirToTarget /= flatDirection;
+
+        //cylindercal raidal check
+        if (flatDirection > outterRadius || flatDirection < innerRadius) return false; //out of outterRadius range
+
+        //height check
+        if (vecToTarget.y < 0 || vecToTarget.y > height) return false; //out of height range
+
+        //angular checks
+        if (flatDirToTarget.z < angleThresh) return false; //out of angular range
+
+        //if we pass all the test we are inside
+        return true;
+    }
+    
     #endregion
     
 }
