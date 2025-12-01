@@ -79,21 +79,29 @@ public class CheesyScript : MonoBehaviour
         shape switch {
             Shape.WedgeSector     => WedgeContains( position ),
             Shape.Spherical => SphereContains( position ),
-            Shape.SphericalSector      => SphereContains( position ),
-            _               => throw new IndexOutOfRangeException()
+            Shape.SphericalSector      => SphereContains( position )
         };
 
     //Sphere conditon and gismos
     public bool SphereContains(Vector3 position)
     {
-        float distance = Vector3.Distance( transform.position, position );
+        Vector3 dirToTargetWorld = (position - transform.position);
+        Vector3 dirToTargetLocal = transform.InverseTransformVector(dirToTargetWorld);
+        float distance = dirToTargetLocal.magnitude;
         return distance >= innerRadius && distance <= outterRadius;
         
     }
 
     public void DrawSphereGismos()
     {
-        
+        if (SphereContains(target.position))
+        {
+            TrigLaser.inTrigger = true;
+        }
+        else
+        {
+            TrigLaser.inTrigger = false;
+        }
         Gizmos.DrawWireSphere(default, innerRadius);
         Gizmos.DrawWireSphere(default, outterRadius);
     }
@@ -186,7 +194,14 @@ public class CheesyScript : MonoBehaviour
 
     public void DrawSphericalSectorGizmos()
     {
-
+        if (SphericalSectorContains(target.position))
+        {
+            TrigLaser.inTrigger = true;
+        }
+        else
+        {
+            TrigLaser.inTrigger = false;
+        }
         
         float p = angleThresh;
         float x = Mathf.Sqrt(1 - p * p);
