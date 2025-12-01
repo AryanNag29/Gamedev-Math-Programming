@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using JetBrains.Annotations;
+using NUnit.Framework.Constraints;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
@@ -43,6 +44,8 @@ public class CheesyScript : MonoBehaviour
     public float height = 1;
     [Range(0, 180)] //quite usefull for the range base slider
     public float fovDeg = 45f; //an actual angle
+
+    public bool isConeon = true;
     #endregion
 
     #region Properties
@@ -77,9 +80,10 @@ public class CheesyScript : MonoBehaviour
     #region Function
     public bool Contains( Vector3 position ) =>
         shape switch {
-            Shape.WedgeSector     => WedgeContains( position ),
+            Shape.WedgeSector => WedgeContains( position ),
+            Shape.SphericalSector => SphereContains( position ),
             Shape.Spherical => SphereContains( position ),
-            Shape.SphericalSector      => SphereContains( position )
+            _ => throw new IndexOutOfRangeException()
         };
 
     //Sphere conditon and gismos
@@ -177,19 +181,10 @@ public class CheesyScript : MonoBehaviour
     }
     public bool SphericalSectorContains(Vector3 position)
     {
-        if( SphereContains( position ) == false )
-            return false;
         Vector3 dirToTarget = ( position - transform.position ).normalized;
         float angleRad = AngleBetweenNormalizedVectors( transform.forward, dirToTarget );
-        if (angleRad < fovRed / 2)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
+        if (SphereContains(position) == false) return false;
+        return angleRad < fovRed/2;
     }
 
     public void DrawSphericalSectorGizmos()
