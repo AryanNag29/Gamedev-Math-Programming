@@ -44,7 +44,7 @@ public class CheesyScript : MonoBehaviour
     public float height = 1;
     [Range(0, 360)] //quite usefull for the range base slider
     public float fovDeg = 45f; //an actual angle
-    #endregiona
+    #endregion
 
     #region Properties
     public float fovRed => fovDeg * Mathf.Deg2Rad;
@@ -102,7 +102,6 @@ public class CheesyScript : MonoBehaviour
             //gizmos and handles 
             Handles.DrawWireArc(default,Vector3.up,vLeftInner,fovDeg,innerRadius);
             Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,outterRadius);
-        
             Gizmos.DrawLine(vLeftInner,vLeftOutter);
             Gizmos.DrawLine(vRightInner,vRightOutter);
         }
@@ -127,7 +126,6 @@ public class CheesyScript : MonoBehaviour
     }
     public void DrawSphereGismos()
     {
-   
         Gizmos.DrawWireSphere(default, innerRadius);
         Gizmos.DrawWireSphere(default, outterRadius);
     }
@@ -155,7 +153,6 @@ public class CheesyScript : MonoBehaviour
         Gizmos.DrawLine(vRightInner, vRightOutter);
         Gizmos.DrawLine(top + vLeftInner, top + vLeftOutter);
         Gizmos.DrawLine(top + vRightInner, top + vRightOutter);
-
         Gizmos.DrawLine(top + vLeftInner, vLeftInner);
         Gizmos.DrawLine(top + vRightInner, vRightInner);
         Gizmos.DrawLine(vLeftOutter, top + vLeftOutter);
@@ -189,7 +186,6 @@ public class CheesyScript : MonoBehaviour
         Vector3 dirToTargetLocal = transform.InverseTransformVector(dirToTargetWorld);
         float distance = dirToTargetLocal.magnitude;
         return distance >= innerRadius && distance <= outterRadius;
-        
     }
     //wedge conditon and gizmos
     public bool WedgeContains(Vector3 position)
@@ -198,7 +194,6 @@ public class CheesyScript : MonoBehaviour
 
         //InverseTransformVector is  world to local
         Vector3 vecToTarget = transform.InverseTransformVector(dirToTargetWorld);
-
         Vector3 flatDirToTarget = vecToTarget;
         float flatDirection = flatDirToTarget.magnitude;
         flatDirToTarget.y = 0;
