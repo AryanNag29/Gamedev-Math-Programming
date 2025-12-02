@@ -42,9 +42,9 @@ public class CheesyScript : MonoBehaviour
     public float outterRadius = 1;
     public float innerRadius = 0.2f;
     public float height = 1;
-    [Range(0, 180)] //quite usefull for the range base slider
+    [Range(0, 360)] //quite usefull for the range base slider
     public float fovDeg = 45f; //an actual angle
-    #endregion
+    #endregiona
 
     #region Properties
     public float fovRed => fovDeg * Mathf.Deg2Rad;
@@ -180,7 +180,7 @@ public class CheesyScript : MonoBehaviour
         float angleRad = AngleBetweenNormalizedVectors( transform.forward, dirToTarget );
         if (angleRad > fovRed/2) return false; //out of angular range 
         //both conditon is true
-        return true;
+        return true;    
     }
     //Sphere conditon and gismos
     public bool SphereContains(Vector3 position)
