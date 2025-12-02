@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using JetBrains.Annotations;
+using Mono.Cecil;
 using NUnit.Framework.Constraints;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -163,8 +164,8 @@ public class CheesyScript : MonoBehaviour
     public bool Contains( Vector3 position ) =>
         shape switch {
             Shape.WedgeSector => WedgeContains( position ),
-            Shape.SphericalSector => SphereContains( position ),
             Shape.Spherical => SphereContains( position ),
+            Shape.SphericalSector => SphericalSectorContains( position ),
             _               => throw new IndexOutOfRangeException()
         };
     static float AngleBetweenNormalizedVectors( Vector3 a, Vector3 b ) {
@@ -174,10 +175,12 @@ public class CheesyScript : MonoBehaviour
     public bool SphericalSectorContains(Vector3 position)
     {
         if( SphereContains( position ) == false )
-            return false;
+            return false; //out of radial range
         Vector3 dirToTarget = ( position - transform.position ).normalized;
         float angleRad = AngleBetweenNormalizedVectors( transform.forward, dirToTarget );
-        return angleRad < fovRed/2;
+        if (angleRad > fovRed/2) return false; //out of angular range 
+        //both conditon is true
+        return true;
     }
     //Sphere conditon and gismos
     public bool SphereContains(Vector3 position)
