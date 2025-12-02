@@ -11,7 +11,6 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Serialization;
 
-
 public class CheesyScript : MonoBehaviour
 {
     #region Enum
@@ -178,7 +177,7 @@ public class CheesyScript : MonoBehaviour
             return false;
         Vector3 dirToTarget = ( position - transform.position ).normalized;
         float angleRad = AngleBetweenNormalizedVectors( transform.forward, dirToTarget );
-        return angleRad < fovRed / 2;
+        return angleRad < fovRed/2;
     }
     //Sphere conditon and gismos
     public bool SphereContains(Vector3 position)
