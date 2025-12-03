@@ -21,10 +21,12 @@ public class ClockScript : MonoBehaviour
     #region gizmos
     void OnDrawGizmos()
     {
+        Gizmos.matrix = Handles.matrix = transform.localToWorldMatrix;
         Handles.DrawWireDisc(default, Vector3.forward,clockRadius);
         Vector2 Second = AngleToDis(angRed*20f)*secHand;
         Vector2 Minute = AngleToDis(angRed*45f)*minHand;
         Vector2 Hour = AngleToDis(angRed*90f)*hourHand;
+        
         
         //DrawHands
         Gizmos.color = Color.red;
