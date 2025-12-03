@@ -35,7 +35,13 @@ public class ClockScript : MonoBehaviour
     Vector2 SecondToDirection(int second)
     {
         float t = (float)second / 60;
-        float angleRad = t * Tau;
+        
+        return FractionToDirection(t);
+    }
+
+    Vector2 FractionToDirection(float t)
+    {
+        float angleRad = -t * Tau + Tau/4;
         return AngToDis(angleRad);
     }
 
