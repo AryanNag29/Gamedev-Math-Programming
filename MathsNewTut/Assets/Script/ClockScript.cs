@@ -1,42 +1,54 @@
 using Unity.VisualScripting;
+using System;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
 
 public class ClockScript : MonoBehaviour
 {
-    #region variables
+    #region Variables 
+    [Range(0,60)]
+    public int angSecMinHand = 1;
+    [Range(0,60f)]
+    public float angHourHand = 1f;
+    
     public float clockRadius = 1f;
-    public float angRed = 1f;
-    private float secHand = .85f;
-    private float minHand = .75f;
-    private float hourHand = .50f;
     #endregion
 
-    #region Properties
+    #region Constants
 
-    Vector2 AngleToDis(float AngRed) => new Vector2(Mathf.Cos(AngRed), Mathf.Sin(AngRed));        
+    private const float Tau = Mathf.PI * 2;
+        
 
     #endregion
     
-    #region gizmos
-    void OnDrawGizmos()
+
+    #region Properties
+
+    Vector2 AngToDis(float angle)=> new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+
+    #endregion
+
+    #region Functions
+
+    Vector2 SecondToDirection(int second)
+    {
+        float t = (float)second / 60;
+        float angleRad = t * Tau;
+        return AngToDis(angleRad);
+    }
+
+    #endregion
+
+    #region Gizmos
+    
+    private void OnDrawGizmos()
     {
         Gizmos.matrix = Handles.matrix = transform.localToWorldMatrix;
         Handles.DrawWireDisc(default, Vector3.forward,clockRadius);
-        Vector2 Second = AngleToDis(angRed*20f)*secHand;
-        Vector2 Minute = AngleToDis(angRed*45f)*minHand;
-        Vector2 Hour = AngleToDis(angRed*90f)*hourHand;
-        
-        
-        //DrawHands
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(default,Second);
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(default,Minute);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(default,Hour);
-        
+        Gizmos.DrawRay(default , SecondToDirection(angSecMinHand));
     }
     #endregion
-
+    
 }
