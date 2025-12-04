@@ -20,20 +20,20 @@ public class ClockScript : MonoBehaviour
     
     public float clockRadius = 1f;
     public bool SmoothMotion;
+    public bool IS24Hours;
     #endregion
 
     #region Constants
 
     private const float Tau = Mathf.PI * 2;
-        
-
+    
     #endregion
     
 
     #region Properties
     //MathUtilities
     static Vector2 AngToDis(float angle)=> new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-
+    int hours24 => IS24Hours? 24:12;
     #endregion
 
     #region Functions
@@ -49,7 +49,7 @@ public class ClockScript : MonoBehaviour
     }
 
     Vector2 SecondOrMinuteToDirection(float secOrMin)=>ValueToDir(secOrMin,60);
-    Vector2 HoursToDirection(float Hours) => ValueToDir(Hours,12);
+    Vector2 HoursToDirection(float Hours) => ValueToDir(Hours,hours24);
     Vector2 ValueToDir(float value , float maxValue)
     {
         float t = (float)value / maxValue; // 0-1 value representing the percente / fraction along the 0-60 range
@@ -77,8 +77,9 @@ public class ClockScript : MonoBehaviour
             Vector2 Dir = SecondOrMinuteToDirection(i);
             DrawTick(Dir,TickSizeSecMinHand,1);
         }
+        
         //hours
-        for (float i = 0; i < 12; i++)
+        for (float i = 0; i < hours24; i++)
         {
             Vector2 Dir = HoursToDirection(i);
             DrawTick(Dir,TickSizeHourHand,3);
