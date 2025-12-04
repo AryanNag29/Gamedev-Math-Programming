@@ -10,8 +10,8 @@ public class ClockScript : MonoBehaviour
     #region Variables 
     [Range(0,60)]
     public int angSecMinHand = 1;
-    [Range(0,60f)]
-    public float angHourHand = 1f;
+    [Range(0,24)]
+    public int angHourHand = 1;
     
     [Range(0,0.2f)]
     public float TickSizeSecMinHand = 0.05f;
@@ -41,6 +41,11 @@ public class ClockScript : MonoBehaviour
     {
         Handles.DrawLine(dir, dir*(1f-length),Thickness);
     }
+    void DrawClockHands(Vector2 dir, float length, float Thickness,Color color)
+    {
+        using (new Handles.DrawingScope(color))
+        Handles.DrawLine(default, dir*length,Thickness);
+    }
 
     Vector2 SecondOrMinuteToDirection(int secOrMin)=>ValueToDir(secOrMin,60);
     Vector2 HoursToDirection(int Hours) => ValueToDir(Hours,12);
@@ -64,7 +69,6 @@ public class ClockScript : MonoBehaviour
     {
         Gizmos.matrix = Handles.matrix = transform.localToWorldMatrix;
         Handles.DrawWireDisc(default, Vector3.forward,clockRadius);
-        Gizmos.DrawRay(default , SecondOrMinuteToDirection(angSecMinHand));
         
         //Tick(min/Sec)
         for (int i = 0; i < 60; i++)
@@ -78,6 +82,11 @@ public class ClockScript : MonoBehaviour
             Vector2 Dir = HoursToDirection(i);
             DrawTick(Dir,TickSizeHourHand,3);
         }
+        //DrawClockHands
+        DateTime Time = DateTime.Now;
+        DrawClockHands(SecondOrMinuteToDirection(Time.Second),0.9f,1,Color.red);
+        DrawClockHands(SecondOrMinuteToDirection(Time.Minute),0.7f,2,Color.green);
+        DrawClockHands(HoursToDirection(Time.Hour),0.5f,4,Color.blue);
     }
     #endregion
     
