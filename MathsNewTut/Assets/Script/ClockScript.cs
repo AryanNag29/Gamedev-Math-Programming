@@ -14,7 +14,7 @@ public class ClockScript : MonoBehaviour
     public float angHourHand = 1f;
     
     [Range(0,0.2f)]
-    public float TickSizeSecMinHand = 0.2f;
+    public float TickSizeSecMinHand = 0.05f;
     
     public float clockRadius = 1f;
     #endregion
@@ -40,10 +40,11 @@ public class ClockScript : MonoBehaviour
         Handles.DrawLine(dir, dir*(1f-length),Thickness);
     }
 
-    Vector2 SecondOrMinuteToDirection(int secOrMin)
+    Vector2 SecondOrMinuteToDirection(int secOrMin)=>ValueToDir(secOrMin,60);
+    Vector2 HoursToDirection(int Hours) => ValueToDir(Hours,12);
+    Vector2 ValueToDir(int value , float maxValue)
     {
-        float t = (float)secOrMin / 60; // 0-1 value representing the percente / fraction along the 0-60 range
-        
+        float t = (float)value / maxValue; // 0-1 value representing the percente / fraction along the 0-60 range
         return FractionToDirection(t);
     }
 
@@ -67,6 +68,12 @@ public class ClockScript : MonoBehaviour
         for (int i = 0; i < 60; i++)
         {
             Vector2 Dir = SecondOrMinuteToDirection(i);
+            DrawTick(Dir,TickSizeSecMinHand,1);
+        }
+        //hours
+        for (int i = 0; i < 12; i++)
+        {
+            Vector2 Dir = HoursToDirection(i);
             DrawTick(Dir,TickSizeSecMinHand,1);
         }
     }
