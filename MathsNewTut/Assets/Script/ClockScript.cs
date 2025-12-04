@@ -13,6 +13,9 @@ public class ClockScript : MonoBehaviour
     [Range(0,60f)]
     public float angHourHand = 1f;
     
+    [Range(0,0.2f)]
+    public float TickSizeSecMinHand = 0.2f;
+    
     public float clockRadius = 1f;
     #endregion
 
@@ -32,9 +35,14 @@ public class ClockScript : MonoBehaviour
 
     #region Functions
 
+    void DrawTick(Vector2 dir, float length, float Thickness)
+    {
+        Handles.DrawLine(dir, dir*(1f-length),Thickness);
+    }
+
     Vector2 SecondOrMinuteToDirection(int secOrMin)
     {
-        float t = (float)secOrMin / 60;
+        float t = (float)secOrMin / 60; // 0-1 value representing the percente / fraction along the 0-60 range
         
         return FractionToDirection(t);
     }
@@ -54,6 +62,13 @@ public class ClockScript : MonoBehaviour
         Gizmos.matrix = Handles.matrix = transform.localToWorldMatrix;
         Handles.DrawWireDisc(default, Vector3.forward,clockRadius);
         Gizmos.DrawRay(default , SecondOrMinuteToDirection(angSecMinHand));
+        
+        //Tick(min/Sec)
+        for (int i = 0; i < 60; i++)
+        {
+            Vector2 Dir = SecondOrMinuteToDirection(i);
+            DrawTick(Dir,TickSizeSecMinHand,1);
+        }
     }
     #endregion
     
