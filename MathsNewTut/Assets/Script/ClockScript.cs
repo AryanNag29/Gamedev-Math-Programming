@@ -9,9 +9,9 @@ public class ClockScript : MonoBehaviour
 {
     #region Variables 
     [Range(0,60)]
-    public int angSecMinHand = 1;
+    public float angSecMinHand = 1;
     [Range(0,24)]
-    public int angHourHand = 1;
+    public float angHourHand = 1;
     
     [Range(0,0.2f)]
     public float TickSizeSecMinHand = 0.05f;
@@ -19,6 +19,7 @@ public class ClockScript : MonoBehaviour
     public float TickSizeHourHand = 0.3f;
     
     public float clockRadius = 1f;
+    public bool SmoothMotion;
     #endregion
 
     #region Constants
@@ -47,9 +48,9 @@ public class ClockScript : MonoBehaviour
         Handles.DrawLine(default, dir*length,Thickness);
     }
 
-    Vector2 SecondOrMinuteToDirection(int secOrMin)=>ValueToDir(secOrMin,60);
-    Vector2 HoursToDirection(int Hours) => ValueToDir(Hours,12);
-    Vector2 ValueToDir(int value , float maxValue)
+    Vector2 SecondOrMinuteToDirection(float secOrMin)=>ValueToDir(secOrMin,60);
+    Vector2 HoursToDirection(float Hours) => ValueToDir(Hours,12);
+    Vector2 ValueToDir(float value , float maxValue)
     {
         float t = (float)value / maxValue; // 0-1 value representing the percente / fraction along the 0-60 range
         return FractionToDirection(t);
@@ -71,22 +72,26 @@ public class ClockScript : MonoBehaviour
         Handles.DrawWireDisc(default, Vector3.forward,clockRadius);
         
         //Tick(min/Sec)
-        for (int i = 0; i < 60; i++)
+        for (float i = 0; i < 60; i++)
         {
             Vector2 Dir = SecondOrMinuteToDirection(i);
             DrawTick(Dir,TickSizeSecMinHand,1);
         }
         //hours
-        for (int i = 0; i < 12; i++)
+        for (float i = 0; i < 12; i++)
         {
             Vector2 Dir = HoursToDirection(i);
             DrawTick(Dir,TickSizeHourHand,3);
         }
         //DrawClockHands
         DateTime Time = DateTime.Now;
-        DrawClockHands(SecondOrMinuteToDirection(Time.Second),0.9f,1,Color.red);
-        DrawClockHands(SecondOrMinuteToDirection(Time.Minute),0.7f,2,Color.green);
-        DrawClockHands(HoursToDirection(Time.Hour),0.5f,4,Color.blue);
+        float Seconds = Time.Second;
+        if (SmoothMotion)
+            Seconds += Time.Millisecond / 1000f;
+        DrawClockHands(SecondOrMinuteToDirection(Seconds),0.8f,1,Color.red);
+        DrawClockHands(SecondOrMinuteToDirection(Time.Minute),0.7f,4,Color.green);
+        DrawClockHands(HoursToDirection(Time.Hour),0.5f,8,Color.blue);
+        
     }
     #endregion
     
