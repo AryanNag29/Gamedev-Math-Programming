@@ -25,16 +25,16 @@ public class ClockScript : MonoBehaviour
     
 
     #region Properties
-
-    Vector2 AngToDis(float angle)=> new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+    //MathUtilities
+    static Vector2 AngToDis(float angle)=> new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
     #endregion
 
     #region Functions
 
-    Vector2 SecondToDirection(int second)
+    Vector2 SecondOrMinuteToDirection(int secOrMin)
     {
-        float t = (float)second / 60;
+        float t = (float)secOrMin / 60;
         
         return FractionToDirection(t);
     }
@@ -53,7 +53,7 @@ public class ClockScript : MonoBehaviour
     {
         Gizmos.matrix = Handles.matrix = transform.localToWorldMatrix;
         Handles.DrawWireDisc(default, Vector3.forward,clockRadius);
-        Gizmos.DrawRay(default , SecondToDirection(angSecMinHand));
+        Gizmos.DrawRay(default , SecondOrMinuteToDirection(angSecMinHand));
     }
     #endregion
     
