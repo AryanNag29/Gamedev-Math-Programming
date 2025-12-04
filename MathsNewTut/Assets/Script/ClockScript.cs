@@ -15,6 +15,8 @@ public class ClockScript : MonoBehaviour
     
     [Range(0,0.2f)]
     public float TickSizeSecMinHand = 0.05f;
+    [Range(0,0.2f)]
+    public float TickSizeHourHand = 0.3f;
     
     public float clockRadius = 1f;
     #endregion
@@ -74,7 +76,7 @@ public class ClockScript : MonoBehaviour
         for (int i = 0; i < 12; i++)
         {
             Vector2 Dir = HoursToDirection(i);
-            DrawTick(Dir,TickSizeSecMinHand,1);
+            DrawTick(Dir,TickSizeHourHand,3);
         }
     }
     #endregion
