@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
@@ -10,8 +11,8 @@ public class newTurret : MonoBehaviour
 
     #region Variables
 
-    private float pitch;
-    private float yaw;
+    private float pitchDeg;
+    private float yawDeg;
     public float smoothingFector = 0.2f;
 
     #endregion
@@ -22,15 +23,16 @@ public class newTurret : MonoBehaviour
     {
         float xMouse = Input.GetAxis("Mouse X");//to get the mouse x input
         float yMouse = Input.GetAxis("Mouse Y");//to get the mouse y input
-        pitch += -yMouse*smoothingFector;
-        yaw += xMouse*smoothingFector;
+        pitchDeg += -yMouse*smoothingFector;
+        pitchDeg = Mathf.Clamp(pitchDeg, -90,90);
+        yawDeg += xMouse*smoothingFector;
 
-        transform.rotation = Quaternion.Euler(pitch, yaw, 0);// setting the mouse input into rotation of camera to locate the turret
+        transform.rotation = Quaternion.Euler(pitchDeg, yawDeg, 0);// setting the mouse input into rotation of camera to locate the turret
         //when you press left mouse button the turret will be fixed
         if (Input.GetMouseButton(0))
         {
-            pitch = 0;
-            yaw = 0;
+            pitchDeg = 0;
+            yawDeg = 0;
         }
     }
 
@@ -53,6 +55,17 @@ public class newTurret : MonoBehaviour
             // Gizmos.color = Color.white;
             // Gizmos.DrawLine(ray.origin, hit.point);
         }
+    }
+
+    #endregion
+
+    #region Awake
+
+    private void Awake()
+    {
+        Vector3 mouseLook = transform.eulerAngles;
+        pitchDeg = mouseLook.y;
+        yawDeg = mouseLook.x;
     }
 
     #endregion
