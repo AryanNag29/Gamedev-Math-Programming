@@ -4,26 +4,47 @@ using UnityEngine;
 public class newTurret : MonoBehaviour
 {
     #region PublicReferences
-    public Transform Turret;
+    public Transform turret;
     #endregion
 
-    #region Gizmos
-    void OnDrawGizmos()
+    #region Functions
+
+    public void UpdateMouse()
     {
-        if (Turret == null) return;
+        float xMouse = Input.GetAxis("Mouse X");//to get the mouse x input
+        float yMouse = Input.GetAxis("Mouse Y");//to get the mouse y input
+        Debug.Log($"x: {xMouse}, y: {yMouse}");
+    }
 
+    public void TurretPlacer()
+    {
         Ray ray = new Ray(transform.position, transform.forward);
-
+        
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            Turret.position = hit.point;
+            turret.position = hit.point;
+
             Vector3 yAxis = hit.normal;
-            Vector3 xAxis = Vector3.Cross(yAxis, ray.direction).normalized;
-            Vector3 zAxis = Vector3.Cross(yAxis, xAxis);
-            Turret.rotation = quaternion.LookRotation(zAxis, yAxis);
-            Gizmos.color = new Color(1,1,1,0.4f); // the forth component for the new color is the opacity
-            Gizmos.DrawLine(ray.origin, hit.point);
+            //cross product for the turret
+            //Gram-Schmidt orthonormalization
+            Vector3 xAxis = Vector3.Cross(yAxis, ray.direction).normalized; //bitangent 
+            Vector3 zAxis = Vector3.Cross(xAxis, yAxis); //tangents
+            turret.rotation = Quaternion.LookRotation(zAxis, yAxis);
+            Debug.DrawLine(ray.origin, hit.point);
+            turret.rotation = Quaternion.Euler(0,180f,0);
+            // Gizmos.color = Color.white;
+            // Gizmos.DrawLine(ray.origin, hit.point);
         }
+    }
+
+    #endregion
+
+    #region Update
+
+    private void Update()
+    {
+        TurretPlacer();
+        UpdateMouse();
     }
     #endregion
 }
