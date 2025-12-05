@@ -38,7 +38,7 @@ public class Turretplacer : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        TurretPlacer();s
+        TurretPlacer();
     }
     #endregion
 }
