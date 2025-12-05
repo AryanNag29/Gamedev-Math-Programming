@@ -25,7 +25,8 @@ public class newTurret : MonoBehaviour
         pitch += -yMouse*smoothingFector;
         yaw += xMouse*smoothingFector;
 
-        transform.rotation = Quaternion.Euler(pitch, yaw, 0);
+        transform.rotation = Quaternion.Euler(pitch, yaw, 0);// setting the mouse input into rotation of camera to locate the turret
+        //when you press left mouse button the turret will be fixed
         if (Input.GetMouseButton(0))
         {
             pitch = 0;
