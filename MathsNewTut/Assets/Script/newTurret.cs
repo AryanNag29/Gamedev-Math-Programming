@@ -14,7 +14,8 @@ public class newTurret : MonoBehaviour
     private float pitchDeg;
     private float yawDeg;
     public float smoothingFector = 0.2f;
-
+    [Range(-90,90)]
+    public float turretYawDegRotation;
     #endregion
 
     #region Functions
@@ -26,7 +27,6 @@ public class newTurret : MonoBehaviour
         pitchDeg += -yMouse*smoothingFector;
         pitchDeg = Mathf.Clamp(pitchDeg, -90,90);
         yawDeg += xMouse*smoothingFector;
-
         transform.rotation = Quaternion.Euler(pitchDeg, yawDeg, 0);// setting the mouse input into rotation of camera to locate the turret
         //when you press left mouse button the turret will be fixed
         if (Input.GetMouseButton(0))
@@ -34,6 +34,13 @@ public class newTurret : MonoBehaviour
             pitchDeg = 0;
             yawDeg = 0;
         }
+
+    }
+
+    void MouseWheel()
+    {
+        float mouseWheel = Input.mouseScrollDelta.y;
+        turretYawDegRotation += mouseWheel;
     }
 
     public void TurretPlacer()
@@ -49,7 +56,8 @@ public class newTurret : MonoBehaviour
             //Gram-Schmidt orthonormalization
             Vector3 xAxis = Vector3.Cross(yAxis, ray.direction).normalized; //bitangent 
             Vector3 zAxis = Vector3.Cross(xAxis, yAxis); //tangents
-            turret.rotation = Quaternion.LookRotation(zAxis, yAxis);
+            Quaternion offset = Quaternion.Euler(0,turretYawDegRotation,0);
+            turret.rotation = Quaternion.LookRotation(zAxis, yAxis)*offset;
             Debug.DrawLine(ray.origin, hit.point);
             turret.rotation = Quaternion.Euler(0,180f,0);
             // Gizmos.color = Color.white;
@@ -76,6 +84,7 @@ public class newTurret : MonoBehaviour
     {
         TurretPlacer();
         UpdateMouse();
+        MouseWheel();
     }
     #endregion
 }
