@@ -1,4 +1,5 @@
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 
 public class newTurret : MonoBehaviour
@@ -7,13 +8,29 @@ public class newTurret : MonoBehaviour
     public Transform turret;
     #endregion
 
+    #region Variables
+
+    private float pitch;
+    private float yaw;
+    public float smoothingFector = 0.2f;
+
+    #endregion
+
     #region Functions
 
     public void UpdateMouse()
     {
         float xMouse = Input.GetAxis("Mouse X");//to get the mouse x input
         float yMouse = Input.GetAxis("Mouse Y");//to get the mouse y input
-        Debug.Log($"x: {xMouse}, y: {yMouse}");
+        pitch += -yMouse*smoothingFector;
+        yaw += xMouse*smoothingFector;
+
+        transform.rotation = Quaternion.Euler(pitch, yaw, 0);
+        if (Input.GetMouseButton(0))
+        {
+            pitch = 0;
+            yaw = 0;
+        }
     }
 
     public void TurretPlacer()
