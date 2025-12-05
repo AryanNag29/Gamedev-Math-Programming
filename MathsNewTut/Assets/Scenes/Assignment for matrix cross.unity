@@ -1457,8 +1457,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClockScript
   angSecMinHand: 0
-  angHourHand: 0.2
+  angHourHand: 1
+  TickSizeSecMinHand: 0.058
+  TickSizeHourHand: 0.136
   clockRadius: 1
+  SmoothMotion: 1
+  IS24Hours: 0
 --- !u!4 &1899055944
 Transform:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Timeline;
@@ -9,11 +10,16 @@ public class Turretplacer : MonoBehaviour
     #endregion
 
     #region Gizmos
-    void OnDrawGizmos()
+
+    private void Update()
+    {
+        TurretPlacer();
+    }
+
+    public void TurretPlacer()
     {
         Ray ray = new Ray(transform.position, transform.forward);
-        if (turret == null) return;
-
+        
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             turret.position = hit.point;
