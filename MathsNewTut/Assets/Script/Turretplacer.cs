@@ -10,13 +10,7 @@ public class Turretplacer : MonoBehaviour
     #endregion
 
     #region Functions
-
-    public void UpdateMouse()
-    {
-        float xMouse = Input.GetAxis("Mouse X");//to get the mouse x input
-        float yMouse = Input.GetAxis("Mouse Y");//to get the mouse y input
-        Debug.Log($"x: {xMouse}, y: {yMouse}");
-    }
+    
 
     public void TurretPlacer()
     {
@@ -32,9 +26,9 @@ public class Turretplacer : MonoBehaviour
             Vector3 xAxis = Vector3.Cross(yAxis, ray.direction).normalized; //bitangent 
             Vector3 zAxis = Vector3.Cross(xAxis, yAxis); //tangents
             turret.rotation = Quaternion.LookRotation(zAxis, yAxis);
-            Debug.DrawLine(ray.origin, hit.point);
-            // Gizmos.color = Color.white;
-            // Gizmos.DrawLine(ray.origin, hit.point);
+            //Debug.DrawLine(ray.origin, hit.point);
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(ray.origin, hit.point);
         }
     }
 
@@ -42,10 +36,9 @@ public class Turretplacer : MonoBehaviour
 
     #region Gizmos
 
-    private void Update()
+    private void OnDrawGizmos()
     {
-        TurretPlacer();
-        UpdateMouse();
+        TurretPlacer();s
     }
     #endregion
 }
