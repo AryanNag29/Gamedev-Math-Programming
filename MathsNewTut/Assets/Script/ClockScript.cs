@@ -32,7 +32,11 @@ public class ClockScript : MonoBehaviour
 
     #region Properties
     //MathUtilities
+    //angle to vector
     static Vector2 AngToDis(float angle)=> new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+    //Atan2 is use to convert from vector2 to angle
+    static float DirToAngle(Vector2 v) => Mathf.Atan2(v.y, v.x);
+    
     int hours24 => IS24Hours? 24:12;
     #endregion
 
@@ -47,13 +51,7 @@ public class ClockScript : MonoBehaviour
         using (new Handles.DrawingScope(color))
         Handles.DrawLine(default, dir*length,Thickness);
     }
-
-    static float DirToAngle(Vector2 v)
-    {
-        //Atan2 is use to convert from vector2 to angle
-        return (float) Mathf.Atan2(v.y, v.x);
-    }
-
+    
     Vector2 SecondOrMinuteToDirection(float secOrMin)=>ValueToDir(secOrMin,60);
     Vector2 HoursToDirection(float Hours) => ValueToDir(Hours,hours24);
     Vector2 ValueToDir(float value , float maxValue)
@@ -65,7 +63,8 @@ public class ClockScript : MonoBehaviour
     Vector2 FractionToDirection(float t)
     {
         float angleRad = -t * Tau + Tau/4;
-        DirToAngle(AngToDis(angleRad));
+        float a = DirToAngle(AngToDis(angleRad)) * Mathf.Rad2Deg;
+        Debug.Log(a);
         return AngToDis(angleRad);
     }
 
