@@ -50,6 +50,7 @@ public class ClockScript : MonoBehaviour
 
     static float DirToAngle(Vector2 v)
     {
+        //Atan2 is use to convert from vector2 to angle
         return (float) Mathf.Atan2(v.y, v.x);
     }
 
@@ -65,7 +66,6 @@ public class ClockScript : MonoBehaviour
     {
         float angleRad = -t * Tau + Tau/4;
         DirToAngle(AngToDis(angleRad));
-        Debug.Log(DirToAngle(AngToDis(angleRad)));
         return AngToDis(angleRad);
     }
 
