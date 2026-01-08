@@ -34,7 +34,7 @@ public class ClockScript : MonoBehaviour
     //MathUtilities
     //angle to vector
     static Vector2 AngToDis(float angle)=> new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-    //Atan2 is use to convert from vector2 to angle
+    //Atan2 is use to convert from vector2 to angle in radian
     static float DirToAngle(Vector2 v) => Mathf.Atan2(v.y, v.x);
     
     int hours24 => IS24Hours? 24:12;
