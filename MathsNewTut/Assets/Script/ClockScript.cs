@@ -48,6 +48,11 @@ public class ClockScript : MonoBehaviour
         Handles.DrawLine(default, dir*length,Thickness);
     }
 
+    static float DirToAngle(Vector2 v)
+    {
+        return (float) Mathf.Atan2(v.y, v.x);
+    }
+
     Vector2 SecondOrMinuteToDirection(float secOrMin)=>ValueToDir(secOrMin,60);
     Vector2 HoursToDirection(float Hours) => ValueToDir(Hours,hours24);
     Vector2 ValueToDir(float value , float maxValue)
@@ -59,6 +64,8 @@ public class ClockScript : MonoBehaviour
     Vector2 FractionToDirection(float t)
     {
         float angleRad = -t * Tau + Tau/4;
+        DirToAngle(AngToDis(angleRad));
+        Debug.Log(DirToAngle(AngToDis(angleRad)));
         return AngToDis(angleRad);
     }
 
