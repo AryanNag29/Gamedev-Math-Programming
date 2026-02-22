@@ -11,55 +11,70 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Serialization;
+using Debug = UnityEngine.Debug;
 
 public class CheesyScript : MonoBehaviour
 {
     #region Enum
+
     public enum Shape
     {
         WedgeSector,
         Spherical,
         SphericalSector
     }
+
     #endregion
 
     #region PublicReferences
+
     public Transform target;
     public laser TrigLaser;
+
     #endregion
 
     #region Stack
 
     Stack<Matrix4x4> mtx = new Stack<Matrix4x4>();
-    void Pushmtx() => mtx.Push(Gizmos.matrix);//pushing the matrix into stack
-    void Popmtx() => SetGizmosMatrix(mtx.Pop());//popping the matrix from the stack and restoring the matrix into it's original form
+    void Pushmtx() => mtx.Push(Gizmos.matrix); //pushing the matrix into stack
+
+    void Popmtx() =>
+        SetGizmosMatrix(mtx.Pop()); //popping the matrix from the stack and restoring the matrix into it's original form
 
     #endregion
 
-    #region Variables 
+    #region Variables
+
     public Shape shape; //enum variable
+
     [FormerlySerializedAs("radius")] //unity will remember the variable as it formal name even you changed the name
     public float outterRadius = 1;
+
     public float innerRadius = 0.2f;
     public float height = 1;
+
     [Range(0, 360)] //quite usefull for the range base slider
     public float fovDeg = 45f; //an actual angle
+
     #endregion
 
     #region Properties
+
     public float fovRed => fovDeg * Mathf.Deg2Rad;
     public float angleThresh => Mathf.Cos(fovRed / 2);
     public void SetGizmosMatrix(Matrix4x4 m) => Gizmos.matrix = Handles.matrix = m;
-    #endregion  
+
+    #endregion
 
     #region Gizmos
+
     void OnDrawGizmos()
     {
         //making gizmos relative to localtoworld metrix
         SetGizmosMatrix(transform.localToWorldMatrix);
         //Condition for the trigger
         Gizmos.color = Handles.color = Contains(target.position) ? Color.red : Color.white;
-        
+
         if (Contains(target.position))
         {
             TrigLaser.inTrigger = true;
@@ -82,9 +97,12 @@ public class CheesyScript : MonoBehaviour
                 break;
         }
     }
+
     #endregion
 
+
     #region Function
+
     public void DrawSphericalSectorGizmos()
     {
         float p = angleThresh;
@@ -95,22 +113,24 @@ public class CheesyScript : MonoBehaviour
         Vector3 vRightOutter = vRightDir * outterRadius;
         Vector3 vLeftInner = vLefDir * innerRadius;
         Vector3 vRightInner = vRightDir * innerRadius;
-        
+
+
         //arcs
         void DrawFlatWedge()
         {
             //gizmos and handles 
-            Handles.DrawWireArc(default,Vector3.up,vLeftInner,fovDeg,innerRadius);
-            Handles.DrawWireArc(default,Vector3.up,vLeftOutter,fovDeg,outterRadius);
-            Gizmos.DrawLine(vLeftInner,vLeftOutter);
-            Gizmos.DrawLine(vRightInner,vRightOutter);
+            Handles.DrawWireArc(default, Vector3.up, vLeftInner, fovDeg, innerRadius);
+            Handles.DrawWireArc(default, Vector3.up, vLeftOutter, fovDeg, outterRadius);
+            Gizmos.DrawLine(vLeftInner, vLeftOutter);
+            Gizmos.DrawLine(vRightInner, vRightOutter);
         }
+
         DrawFlatWedge();
         Pushmtx(); // saves the current matrix to the stack
-        SetGizmosMatrix( Gizmos.matrix * Matrix4x4.TRS( default, Quaternion.Euler( 0, 0, 90 ), Vector3.one ) );
+        SetGizmosMatrix(Gizmos.matrix * Matrix4x4.TRS(default, Quaternion.Euler(0, 0, 90), Vector3.one));
         DrawFlatWedge();
         Popmtx();
-        
+
         //radius
         void Drawring(float coneRadius)
         {
@@ -119,16 +139,19 @@ public class CheesyScript : MonoBehaviour
             float dist = coneRadius * Mathf.Cos(a);
             float radius = coneRadius * Mathf.Sin(a);
             Vector3 center = new Vector3(0, 0, dist);
-            Handles.DrawWireDisc(center,Vector3.forward,radius);
+            Handles.DrawWireDisc(center, Vector3.forward, radius);
         }
+
         Drawring(innerRadius);
         Drawring(outterRadius);
     }
+
     public void DrawSphereGismos()
     {
         Gizmos.DrawWireSphere(default, innerRadius);
         Gizmos.DrawWireSphere(default, outterRadius);
     }
+
     public void DrawWedgeGizmos()
     {
         //Drawing the angle(pythagoras theorem)
@@ -158,27 +181,32 @@ public class CheesyScript : MonoBehaviour
         Gizmos.DrawLine(vLeftOutter, top + vLeftOutter);
         Gizmos.DrawLine(vRightOutter, top + vRightOutter);
     }
-    public bool Contains( Vector3 position ) =>
-        shape switch {
-            Shape.WedgeSector => WedgeContains( position ),
-            Shape.Spherical => SphereContains( position ),
-            Shape.SphericalSector => SphericalSectorContains( position ),
-            _               => throw new IndexOutOfRangeException()
+
+    public bool Contains(Vector3 position) =>
+        shape switch
+        {
+            Shape.WedgeSector => WedgeContains(position),
+            Shape.Spherical => SphereContains(position),
+            Shape.SphericalSector => SphericalSectorContains(position),
+            _ => throw new IndexOutOfRangeException()
         };
-    static float AngleBetweenNormalizedVectors( Vector3 a, Vector3 b ) {
-        return Mathf.Acos( Mathf.Clamp( Vector3.Dot( a, b ), -1, 1 ) );
+
+    static float AngleBetweenNormalizedVectors(Vector3 a, Vector3 b)
+    {
+        return Mathf.Acos(Mathf.Clamp(Vector3.Dot(a, b), -1, 1));
     }
 
     public bool SphericalSectorContains(Vector3 position)
     {
-        if( SphereContains( position ) == false )
+        if (SphereContains(position) == false)
             return false; //out of radial range
-        Vector3 dirToTarget = ( position - transform.position ).normalized;
-        float angleRad = AngleBetweenNormalizedVectors( transform.forward, dirToTarget );
-        if (angleRad > fovRed/2) return false; //out of angular range 
+        Vector3 dirToTarget = (position - transform.position).normalized;
+        float angleRad = AngleBetweenNormalizedVectors(transform.forward, dirToTarget);
+        if (angleRad > fovRed / 2) return false; //out of angular range 
         //both conditon is true
-        return true;    
+        return true;
     }
+
     //Sphere conditon and gismos
     public bool SphereContains(Vector3 position)
     {
@@ -187,6 +215,7 @@ public class CheesyScript : MonoBehaviour
         float distance = dirToTargetLocal.magnitude;
         return distance >= innerRadius && distance <= outterRadius;
     }
+
     //wedge conditon and gizmos
     public bool WedgeContains(Vector3 position)
     {
@@ -211,7 +240,6 @@ public class CheesyScript : MonoBehaviour
         //if we pass all the test we are inside
         return true;
     }
-    
+
     #endregion
-    
 }

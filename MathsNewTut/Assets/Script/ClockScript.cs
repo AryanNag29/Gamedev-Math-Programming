@@ -64,7 +64,7 @@ public class ClockScript : MonoBehaviour
     {
         float angleRad = -t * Tau + Tau/4;
         float a = DirToAngle(AngToDis(angleRad)) * Mathf.Rad2Deg;
-        Debug.Log(a);
+        // Debug.Log(a);
         return AngToDis(angleRad);
     }
 
