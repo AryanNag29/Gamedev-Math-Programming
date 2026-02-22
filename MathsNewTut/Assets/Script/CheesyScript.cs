@@ -240,6 +240,24 @@ public class CheesyScript : MonoBehaviour
         //if we pass all the test we are inside
         return true;
     }
+    
+    //test function
+
+    void ACos()
+    {
+        Vector3 a = new Vector3(3, 4, 5);
+        float b = Mathf.Acos(a.x);
+        Debug.Log("Angle of a" + b);
+    }
+
+    #endregion
+
+    #region Update
+
+    private void Update()
+    {
+        ACos();
+    }
 
     #endregion
 }
