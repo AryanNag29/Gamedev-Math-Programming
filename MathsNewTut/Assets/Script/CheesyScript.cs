@@ -246,8 +246,14 @@ public class CheesyScript : MonoBehaviour
 
     void DirectionToAngle()
     {
-        float a = Mathf.Atan2(transform.position.x, transform.position.y);
+        float a = Mathf.Atan2(transform.position.x, transform.position.y); // it takes two float value
         // Debug.Log(a);
+        
+        //manual dot product using a.b = |a|*|b|*cos(Q);
+        float b = transform.position.magnitude;
+        float c = b * Mathf.Cos(45f);
+        //Debug.Log(c);
+        
     }
 
     private void Update()
