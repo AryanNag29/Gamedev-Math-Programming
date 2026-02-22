@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
+using Freya;
 
 public class CheesyScript : MonoBehaviour
 {
@@ -151,6 +152,7 @@ public class CheesyScript : MonoBehaviour
         Gizmos.DrawWireSphere(default, innerRadius);
         Gizmos.DrawWireSphere(default, outterRadius);
     }
+    
 
     public void DrawWedgeGizmos()
     {
@@ -254,9 +256,8 @@ public class CheesyScript : MonoBehaviour
         float dot = b * Mathf.Cos(45f);
         //Debug.Log(c);
         
-        //manual vector determinant using a^b = |a|*|b|*sin(Q)
+        //manual vector determinant using a^b = |a|*|b|*sin(Q);
         float determinant = b * Mathf.Sin(45f);
-        
     }
 
     private void Update()
