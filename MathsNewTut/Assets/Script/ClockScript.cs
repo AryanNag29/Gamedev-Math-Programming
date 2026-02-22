@@ -60,6 +60,14 @@ public class ClockScript : MonoBehaviour
         return FractionToDirection(t);
     }
 
+    static float DirtoAngle()
+    {
+        Vector2 v = new Vector2(5, 6);
+        float angle = Mathf.Atan2(v.y, v.x);
+        return angle * Mathf.Rad2Deg;
+        Debug.Log("Angle : " + angle);
+    }
+
     Vector2 FractionToDirection(float t)
     {
         float angleRad = -t * Tau + Tau/4;
@@ -69,6 +77,8 @@ public class ClockScript : MonoBehaviour
     }
 
     #endregion
+
+    
 
     #region Gizmos
     
