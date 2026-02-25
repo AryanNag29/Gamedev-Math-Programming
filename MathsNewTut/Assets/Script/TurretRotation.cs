@@ -6,11 +6,13 @@ using UnityEngine.UIElements;
 public class TurretRotation : MonoBehaviour
 {
     #region References
+
     public Transform target;
     public CheesyScript trigger;
     public Transform gunTf;
     public float smoothingFector = 1f; //t of lerp function
     Quaternion TargetRotation;
+
     #endregion
 
     #region Variables
@@ -22,6 +24,7 @@ public class TurretRotation : MonoBehaviour
     #endregion
 
     #region Update
+
     void Update()
     {
         //snell's law using unity plane type
@@ -41,10 +44,14 @@ public class TurretRotation : MonoBehaviour
             //note: worldspace rotation
             Vector3 vecToTargetgun = target.position - gunTf.position;
             TargetRotation = Quaternion.LookRotation(vecToTargetgun, transform.up);
-        }else{}
+        }
+        else
+        {
+        }
+
         //smoothing rotation towards target using slerp  (make this outsize of condition)
         gunTf.rotation = Quaternion.Slerp(gunTf.rotation, TargetRotation, smoothingFector * Time.deltaTime);
     }
-    #endregion
 
+    #endregion
 }

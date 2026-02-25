@@ -152,7 +152,7 @@ public class CheesyScript : MonoBehaviour
         Gizmos.DrawWireSphere(default, innerRadius);
         Gizmos.DrawWireSphere(default, outterRadius);
     }
-    
+
 
     public void DrawWedgeGizmos()
     {
@@ -242,6 +242,7 @@ public class CheesyScript : MonoBehaviour
         //if we pass all the test we are inside
         return true;
     }
+
     #endregion
 
     #region Test
@@ -250,12 +251,12 @@ public class CheesyScript : MonoBehaviour
     {
         float angle = Mathf.Atan2(transform.position.x, transform.position.y); // it takes two float value
         // Debug.Log(a);
-        
+
         //manual dot product using a.b = |a|*|b|*cos(Q);
         float b = transform.position.magnitude;
         float dot = b * Mathf.Cos(45f);
         //Debug.Log(c);
-        
+
         //manual vector determinant using a^b = |a|*|b|*sin(Q);
         float determinant = b * Mathf.Sin(45f);
     }

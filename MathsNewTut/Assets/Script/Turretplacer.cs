@@ -6,16 +6,17 @@ using UnityEngine.Timeline;
 public class Turretplacer : MonoBehaviour
 {
     #region PublicReferences
+
     public Transform turret;
+
     #endregion
 
     #region Functions
-    
 
     public void TurretPlacer()
     {
         Ray ray = new Ray(transform.position, transform.forward);
-        
+
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             turret.position = hit.point;
@@ -40,5 +41,6 @@ public class Turretplacer : MonoBehaviour
     {
         TurretPlacer();
     }
+
     #endregion
 }
