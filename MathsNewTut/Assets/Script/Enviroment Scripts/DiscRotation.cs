@@ -5,7 +5,7 @@ public class DiscRotation : MonoBehaviour
 {
     #region Variables
 
-    [Range(0.1f, 50f)] public float rotationSpeed = 1f;
+    [Range(-50f, 50f)] public float rotationSpeed = 1f;
 
     #endregion
 
