@@ -5,7 +5,7 @@ public class DiscRotation : MonoBehaviour
 {
     #region Variables
 
-    private float rotationSpeed = 10f;
+    [Range(0.1f, 50f)] public float rotationSpeed = 1f;
 
     #endregion
 
@@ -18,11 +18,10 @@ public class DiscRotation : MonoBehaviour
     }
 
     #endregion
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
     // Update is called once per frame
