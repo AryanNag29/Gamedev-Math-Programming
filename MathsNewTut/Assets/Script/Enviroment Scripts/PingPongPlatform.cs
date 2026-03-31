@@ -1,16 +1,36 @@
+using System;
 using UnityEngine;
 
 public class PingPongPlatform : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    #region Variables
+
+    
+
+    #endregion
+
+
+    #region Functions
+
+    
+
+    #endregion
+
+    #region Start
+
+    private void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    #endregion
+
+    #region Update
+
+    private void Update()
     {
         
     }
+
+    #endregion
 }
