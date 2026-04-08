@@ -8,20 +8,19 @@ public class PingPongPlatform : MonoBehaviour
     public Vector3 movementOffset = new Vector3(0, 0, 0);
     private Vector3 startPos;
     private Vector3 endPos;
-    
-    [Range(0.1f,2f)]
-    public float speed = 0f;
+
+    [Range(0.1f, 2f)] public float speed = 0f;
 
     #endregion
 
 
     #region Functions
 
-     private void ChangePosPlatform()
-     {
-         float platformSpeed = Mathf.PingPong(Time.time * speed, 1f);
-         transform.position = Vector3.Lerp(startPos, endPos, platformSpeed);
-     }
+    private void ChangePosPlatform()
+    {
+        float platformSpeed = Mathf.PingPong(Time.time * speed, 1f);
+        transform.position = Vector3.Lerp(startPos, endPos, platformSpeed);
+    }
 
     #endregion
 
