@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//if you include interface type icommand now you have to implement the function included in 'Interface Icommand'
 public class CubeClickCommand : Icommand
 {
     //object of class gameObject and mesh renderer
@@ -18,16 +19,18 @@ public class CubeClickCommand : Icommand
         _renderer = cube.GetComponent<MeshRenderer>();
 
         prevColor = _renderer.material.color;
-        this.newColor = newColor;
+        this.newColor = newColor; // same for this 
     }
 
     public void Execute()
     {
+        //assign new color to the material
         _renderer.material.color = newColor;
     }
 
     public void Undo()
     {
+        //assign prev color to the material whenever undo is clicked
         _renderer.material.color = prevColor;
     }
 }
