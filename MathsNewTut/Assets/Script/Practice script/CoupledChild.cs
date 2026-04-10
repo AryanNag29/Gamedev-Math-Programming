@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class CoupledChild : MonoBehaviour
 {
+    public void childManager()
+    {
+        //logic
+    }
+    
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
