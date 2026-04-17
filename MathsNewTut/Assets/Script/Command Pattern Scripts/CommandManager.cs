@@ -32,7 +32,7 @@ public class CommandManager : MonoBehaviour
         undoStack.Pop().Undo();
     }
 
-    public void redoCommand()
+    public void RedoCommand()
     {
         if (redoStack.Count <= 0)
             return;
