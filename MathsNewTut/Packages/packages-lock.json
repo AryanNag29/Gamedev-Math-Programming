@@ -269,6 +269,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "wischeropp.jonas.scene-view-pie-menu": {
+      "version": "https://github.com/JonasWischeropp/unity-scene-view-pie-menu.git#1.1.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1e28a225eca69a2abf4a791c7b11220c69dc4866"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,
