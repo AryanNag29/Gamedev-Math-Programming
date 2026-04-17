@@ -6,6 +6,20 @@ public class CommandManager : MonoBehaviour
 {
     private Stack<Icommand> undoStack = new();
     private Stack<Icommand> redoStack = new();
+    
+    public static CommandManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void AddCommand(Icommand command)
     {

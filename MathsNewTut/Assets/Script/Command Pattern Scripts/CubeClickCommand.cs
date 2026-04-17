@@ -16,13 +16,19 @@ public class CubeClickCommand : MonoBehaviour,Icommand
     
     public CubeClickCommand(GameObject cube, Color newColor)
     {
-        //assigns the input parameter 'Cube' to the instance property 'This.cube'
-        this._cube = cube;
         _renderer = cube.GetComponent<MeshRenderer>();
+        newColor = newColor;
 
-        prevColor = _renderer.material.color;
-        this.newColor = newColor; // same for this 
-        _CommandManager.AddCommand(this); 
+        if (_renderer != null)
+        {
+            prevColor = _renderer.material.color;
+        
+            // Only call the manager if it definitely exists
+            if (CommandManager.Instance != null)
+            {
+                CommandManager.Instance.AddCommand(this);
+            }
+        }
     }
 
     public void Execute()
