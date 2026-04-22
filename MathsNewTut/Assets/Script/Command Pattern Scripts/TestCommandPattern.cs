@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TestCommandPattern : MonoBehaviour
 {
+
     public void MouseInterface()
     {
         if (Input.GetMouseButtonDown(0))

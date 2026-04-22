@@ -2,18 +2,20 @@ using System;
 using UnityEngine;
 
 //if you include interface type icommand now you have to implement the function included in 'Interface Icommand'
-public class CubeClickCommand : MonoBehaviour,Icommand
+public class CubeClickCommand : MonoBehaviour, Icommand
 {
     //object of class gameObject and mesh renderer
     private GameObject _cube;
     private MeshRenderer _renderer;
 
     public CommandManager _CommandManager;
+
     //these are variable of type color
     private Color newColor;
     private Color prevColor;
-    
-    
+    private Color defaultColor;
+
+
     public CubeClickCommand(GameObject cube, Color newColor)
     {
         _renderer = cube.GetComponent<MeshRenderer>();
@@ -22,7 +24,8 @@ public class CubeClickCommand : MonoBehaviour,Icommand
         if (_renderer != null)
         {
             prevColor = _renderer.material.color;
-        
+
+
             // Only call the manager if it definitely exists
             if (CommandManager.Instance != null)
             {
