@@ -32,7 +32,7 @@ public class CommandManager : MonoBehaviour
         command.Execute();
     }
 
-
+    //undo function store data in stack
     public void UndoCommand()
     {
         //return if ther isn't least 1 command
@@ -45,7 +45,7 @@ public class CommandManager : MonoBehaviour
         //undo current command and remove from the undo stack
         undoStack.Pop().Undo();
     }
-
+    //redo funcition store data in stack
     public void RedoCommand()
     {
         if (redoStack.Count <= 0)
@@ -55,7 +55,7 @@ public class CommandManager : MonoBehaviour
         
         redoStack.Pop().Execute();
     }
-
+    //clear function is to clear undo and redo function stack
     public void ClearCommand()
     {
         undoStack.Clear();
