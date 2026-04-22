@@ -629,12 +629,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 703669762}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44.46093, y: 1.67597, z: 9.77}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3.256667}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1675631888}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &708522278
 GameObject:
@@ -1180,12 +1180,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013035251}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44.46093, y: 1.67597, z: 4.86}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.6200001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1675631888}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1153855560
 GameObject:
@@ -1547,6 +1547,7 @@ GameObject:
   - component: {fileID: 1675631887}
   - component: {fileID: 1675631886}
   - component: {fileID: 1675631885}
+  - component: {fileID: 1675631889}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Cube
@@ -1643,9 +1644,25 @@ Transform:
   m_LocalPosition: {x: 44.46093, y: 1.67597, z: -0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1013035255}
+  - {fileID: 703669766}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1675631889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675631884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17fb3f96dcfd11e448bfcd58bf9906fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  playerUpdatePostionY: 5
+  playerUpdatePostionZ: 5
 --- !u!1 &1970740260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1801,8 +1818,6 @@ SceneRoots:
   - {fileID: 699071412}
   - {fileID: 969594253}
   - {fileID: 1675631888}
-  - {fileID: 1013035255}
-  - {fileID: 703669766}
   - {fileID: 2133883585}
   - {fileID: 1199075232}
   - {fileID: 708522280}
